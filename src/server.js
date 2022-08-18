@@ -19,17 +19,19 @@ const startupMessage = "\n\n\n" +
 "    ╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝ " + '\n\n' +
 "    Authored by: Mongark\n\n\n";
 
-const monad = (logs, msg, lType) => {
+const monad = (logs, msg) => {
     const currentLogId = logs.length;
 
-    console.log('[' + lType + '] ' + 'Stage ' + currentLogId + ': ' + msg);
+    console.log(
+        'Stage ' + currentLogId + ': ' +
+        msg
+    );
 
     return [
         ...logs,
         {
             id: currentLogId,
             message: msg,
-            logType: lType,
         }
     ];
 };
