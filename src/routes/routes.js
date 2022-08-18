@@ -47,7 +47,6 @@ router.patch('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.query;
-        console.log(updatedData);
         const options = { new: true };
 
         const result = await RoomModel.findByIdAndUpdate(
