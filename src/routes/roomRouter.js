@@ -1,10 +1,9 @@
-import express from "express"
-
-const roomRoutes = express.Router()
+import express from "express";
 
 import RoomModel from '../models/room.js';
 
-//Post Method
+const roomRoutes = express.Router();
+
 //Post Method
 roomRoutes.post('/post', async(req, res) => {
     const data = new RoomModel({
@@ -18,7 +17,7 @@ roomRoutes.post('/post', async(req, res) => {
     catch (error) {
         res.status(400).json({message: error.message});
     }
-})
+});
 
 //Get all Method
 roomRoutes.get('/getAll', async (req, res) => {
@@ -29,7 +28,7 @@ roomRoutes.get('/getAll', async (req, res) => {
     catch(error){
         res.status(500).json({ message: error.message })
     }
-})
+});
 
 //Get by ID Method
 roomRoutes.get('/getOne/:id', async (req, res) => {
@@ -40,7 +39,7 @@ roomRoutes.get('/getOne/:id', async (req, res) => {
     catch(error){
         res.status(500).json({message: error.message})
     }
-})
+});
 
 //Update by ID Method
 roomRoutes.patch('/update/:id', async (req, res) => {
@@ -58,7 +57,7 @@ roomRoutes.patch('/update/:id', async (req, res) => {
     catch (error) {
         res.status(400).json({ message: error.message })
     }
-})
+});
 
 //Delete by ID Method
 roomRoutes.delete('/delete/:id', async (req, res) => {
@@ -70,6 +69,6 @@ roomRoutes.delete('/delete/:id', async (req, res) => {
     catch (error) {
         res.status(400).json({ message: error.message })
     }
-})
+});
 
 export default roomRoutes;
