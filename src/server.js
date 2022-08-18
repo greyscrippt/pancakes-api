@@ -3,9 +3,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import addToLogs from './logging/logger.js';
-import routes from './routes/routes.js';
+import RoomRoutes from './routes/roomRouter.js';
+
 
 dotenv.config();
+
 
 console.log(process.env.STARTUP_MSG);
 addToLogs('Initializing API server.');
@@ -21,18 +23,20 @@ mongoose.connect(mongodb_url);
 addToLogs('Creating database client instance...');
 const database = mongoose.connection
 
+app.use(json());
+
 addToLogs('Loading API routes...');
-app.use('/api', routes)
+app.use('/api', RoomRoutes)
+
 
 database.on('error', (error) => {
     addToLogs(error);
 })
 
+
 database.once('connected', () => {
     addToLogs('Database connection established!');
 })
-
-app.use(json());
 
 app.listen(3000, () => {
     addToLogs(`Server Started at ${3000}`)

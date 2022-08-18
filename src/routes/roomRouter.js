@@ -1,12 +1,12 @@
 import express from "express"
 
-const router = express.Router()
+const roomRoutes = express.Router()
 
 import RoomModel from '../models/room.js';
 
 //Post Method
 //Post Method
-router.post('/post', async(req, res) => {
+roomRoutes.post('/post', async(req, res) => {
     const data = new RoomModel({
         name: req.query.name,
     });
@@ -21,7 +21,7 @@ router.post('/post', async(req, res) => {
 })
 
 //Get all Method
-router.get('/getAll', async (req, res) => {
+roomRoutes.get('/getAll', async (req, res) => {
     try{
         const data = await RoomModel.find();
         res.json(data)
@@ -32,7 +32,7 @@ router.get('/getAll', async (req, res) => {
 })
 
 //Get by ID Method
-router.get('/getOne/:id', async (req, res) => {
+roomRoutes.get('/getOne/:id', async (req, res) => {
     try{
         const data = await RoomModel.findById(req.params.id);
         res.json(data)
@@ -43,7 +43,7 @@ router.get('/getOne/:id', async (req, res) => {
 })
 
 //Update by ID Method
-router.patch('/update/:id', async (req, res) => {
+roomRoutes.patch('/update/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const updatedData = req.query;
@@ -61,7 +61,7 @@ router.patch('/update/:id', async (req, res) => {
 })
 
 //Delete by ID Method
-router.delete('/delete/:id', async (req, res) => {
+roomRoutes.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await RoomModel.findByIdAndDelete(id)
@@ -72,4 +72,4 @@ router.delete('/delete/:id', async (req, res) => {
     }
 })
 
-export default router;
+export default roomRoutes;
