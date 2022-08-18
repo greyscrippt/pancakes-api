@@ -33,11 +33,11 @@ database.once('connected', () => {
     addToLogs('Express instance created sucessfully!');
 
     addToLogs('Loading API routes...');
-    addToLogs('-Loading rooms routes...'); // TODO: check if this log is elegant
-    app.use('/rooms', RoomRoutes)
+    addToLogs('--Loading rooms routes...'); // TODO: check if this log is elegant
+    app.use('/rooms', RoomRoutes);
     addToLogs('--Routes for rooms added sucessfully!');
 
     app.listen(3000, () => {
         addToLogs(`Server Started at ${3000}`)
-    })
-})
+    });
+});

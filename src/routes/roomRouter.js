@@ -1,3 +1,5 @@
+// TODO: organize json payload in CRUD
+
 import express from "express";
 
 import RoomModel from '../models/room.js';
