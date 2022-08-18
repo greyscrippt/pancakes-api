@@ -9,20 +9,26 @@ import RoomModel from '../models/room.js';
 router.post('/post', async(req, res) => {
     const data = new RoomModel({
         name: req.query.name,
-    })
+    });
 
     try {
         const dataToSave = data.save();
-        res.status(200).json(dataToSave)
+        res.status(200).json(dataToSave);
     }
     catch (error) {
-        res.status(400).json({message: error.message})
+        res.status(400).json({message: error.message});
     }
 })
 
 //Get all Method
-router.get('/getAll', (req, res) => {
-    res.send('Get All API')
+router.get('/getAll', async (req, res) => {
+    try{
+        const data = await RoomModel.find();
+        res.json(data)
+    }
+    catch(error){
+        res.status(500).json({ message: error.message })
+    }
 })
 
 //Get by ID Method
