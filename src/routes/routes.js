@@ -1,30 +1,43 @@
 import express from "express"
 
-const myrouter = express.Router()
+const router = express.Router()
+
+import RoomModel from '../models/room.js';
 
 //Post Method
-myrouter.post('/post', (req, res) => {
-    res.send('Post API')
+//Post Method
+router.post('/post', async(req, res) => {
+    const data = new RoomModel({
+        name: req.query.name,
+    })
+
+    try {
+        const dataToSave = data.save();
+        res.status(200).json(dataToSave)
+    }
+    catch (error) {
+        res.status(400).json({message: error.message})
+    }
 })
 
 //Get all Method
-myrouter.get('/getAll', (req, res) => {
+router.get('/getAll', (req, res) => {
     res.send('Get All API')
 })
 
 //Get by ID Method
-myrouter.get('/getOne/:id', (req, res) => {
+router.get('/getOne/:id', (req, res) => {
     res.send('Get by ID API')
 })
 
 //Update by ID Method
-myrouter.patch('/update/:id', (req, res) => {
+router.patch('/update/:id', (req, res) => {
     res.send('Update by ID API')
 })
 
 //Delete by ID Method
-myrouter.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     res.send('Delete by ID API')
 })
 
-export default myrouter;
+export default router;

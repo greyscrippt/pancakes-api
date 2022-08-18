@@ -7,8 +7,6 @@ const roomSchema = new mongoose.Schema({
     },
 })
 
- const roomModel = mongoose.model('Room', roomSchema);
+ const RoomModel = mongoose.model('Room', roomSchema);
 
- export {
-    roomModel,
- };
+ export default RoomModel;
