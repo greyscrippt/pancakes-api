@@ -43,13 +43,34 @@ router.get('/getOne/:id', async (req, res) => {
 })
 
 //Update by ID Method
-router.patch('/update/:id', (req, res) => {
-    res.send('Update by ID API')
+router.patch('/update/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updatedData = req.query;
+        console.log(updatedData);
+        const options = { new: true };
+
+        const result = await RoomModel.findByIdAndUpdate(
+            id, updatedData, options
+        )
+
+        res.send(result)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
 })
 
 //Delete by ID Method
-router.delete('/delete/:id', (req, res) => {
-    res.send('Delete by ID API')
+router.delete('/delete/:id', async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await RoomModel.findByIdAndDelete(id)
+        res.send(`Document with ${data.name} has been deleted..`)
+    }
+    catch (error) {
+        res.status(400).json({ message: error.message })
+    }
 })
 
 export default router;
