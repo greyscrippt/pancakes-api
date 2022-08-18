@@ -7,6 +7,6 @@ const guestSchema = new mongoose.Schema({
     },
 })
 
- const GuestModel = mongoose.model('Room', guestSchema);
+ const GuestModel = mongoose.model('Guest', guestSchema);
 
  export default GuestModel;

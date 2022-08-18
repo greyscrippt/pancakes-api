@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 
 import addToLogs from './logging/logger.js';
 import RoomRoutes from './routes/roomRouter.js';
+import GuestRoutes from './routes/guestRouter.js';
 
 dotenv.config();
 
@@ -33,11 +34,16 @@ database.once('connected', () => {
     addToLogs('Express instance created sucessfully!');
 
     addToLogs('Loading API routes...');
+
     addToLogs('--Loading rooms routes...'); // TODO: check if this log is elegant
     app.use('/rooms', RoomRoutes);
-    addToLogs('--Routes for rooms added sucessfully!');
+
+    addToLogs('--Loading guests routes...'); // TODO: check if this log is elegant
+    app.use('/guests', GuestRoutes);
+
+    addToLogs('Loading of routes completed!');
 
     app.listen(3000, () => {
-        addToLogs(`Server Started at ${3000}`)
+        addToLogs(`Server started at ${3000}`)
     });
 });
