@@ -1,11 +1,13 @@
-import { createClient } from 'redis';
+import express, { json } from 'express';
+import mongoose from 'mongoose';
+import { config } from 'dotenv';
 
-const client = createClient();
+const mongoString = process.env.DATABASE_URL
 
-client.on('error', (err) => console.log('Redis Client Error', err));
+const app = express();
 
-await client.connect();
+app.use(json());
 
-await client.set('key', 'Hello, world!');
-
-const value = await client.get('key');
+app.listen(3000, () => {
+    console.log(`Server Started at ${3000}`)
+})
