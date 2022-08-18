@@ -1,32 +1,17 @@
 import express, { json } from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 import addToLogs from './logging/logger.js';
-
 import routes from './routes/routes.js';
 
-const startupMessage = "\n\n\n" +
-"    ███╗░░░███╗██╗███╗░░██╗██╗  ███████╗██████╗░██████╗░  ░█████╗░██████╗░██╗ " + '\n' +
-"    ████╗░████║██║████╗░██║██║  ██╔════╝██╔══██╗██╔══██╗  ██╔══██╗██╔══██╗██║ " + '\n' +
-"    ██╔████╔██║██║██╔██╗██║██║  █████╗░░██████╔╝██████╔╝  ███████║██████╔╝██║ " + '\n' +
-"    ██║╚██╔╝██║██║██║╚████║██║  ██╔══╝░░██╔══██╗██╔═══╝░  ██╔══██║██╔═══╝░██║ " + '\n' +
-"    ██║░╚═╝░██║██║██║░╚███║██║  ███████╗██║░░██║██║░░░░░  ██║░░██║██║░░░░░██║ " + '\n' +
-"    ╚═╝░░░░░╚═╝╚═╝╚═╝░░╚══╝╚═╝  ╚══════╝╚═╝░░╚═╝╚═╝░░░░░  ╚═╝░░╚═╝╚═╝░░░░░╚═╝ " + '\n\n' +
+dotenv.config();
 
-"    ░██████╗███████╗██████╗░██╗░░░██╗███████╗██████╗░ " + '\n' +
-"    ██╔════╝██╔════╝██╔══██╗██║░░░██║██╔════╝██╔══██╗ " + '\n' +
-"    ╚█████╗░█████╗░░██████╔╝╚██╗░██╔╝█████╗░░██████╔╝ " + '\n' +
-"    ░╚═══██╗██╔══╝░░██╔══██╗░╚████╔╝░██╔══╝░░██╔══██╗ " + '\n' +
-"    ██████╔╝███████╗██║░░██║░░╚██╔╝░░███████╗██║░░██║ " + '\n' +
-"    ╚═════╝░╚══════╝╚═╝░░╚═╝░░░╚═╝░░░╚══════╝╚═╝░░╚═╝ " + '\n\n' +
-"    Authored by: Mongark\n\n\n";
-
-
-console.log(startupMessage);
+console.log(process.env.STARTUP_MSG);
 addToLogs('Initializing API server.');
 
 addToLogs('Loading MongoDB database url...');
-const mongodb_url = "mongodb://127.0.0.1:27017/";
+const mongodb_url = process.env.DATABASE_URL;
 addToLogs('Creating express instance...');
 const app = express();
 addToLogs('Express instance created sucessfully!');
@@ -41,7 +26,6 @@ app.use('/api', routes)
 
 database.on('error', (error) => {
     addToLogs(error);
-    console.log(error)
 })
 
 database.once('connected', () => {
