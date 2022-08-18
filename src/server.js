@@ -1,7 +1,7 @@
 import express, { json } from 'express';
 import mongoose from 'mongoose';
 
-import routes from './routes.js';
+import routes from './routes/routes.js';
 
 const mongodb_url = "mongodb://127.0.0.1:27017/";
 
