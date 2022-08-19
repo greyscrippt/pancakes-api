@@ -3,22 +3,13 @@
 import express from "express";
 
 import RoomModel from '../models/room';
+import * as roomController from '../controllers/RoomController';
 
 const roomRoutes = express.Router();
 
 //Post Method
 roomRoutes.post('/post', async(req, res) => {
-    const data = new RoomModel({
-        name: req.query.name,
-    });
-
-    try {
-        const dataToSave = data.save();
-        res.status(200).json(dataToSave);
-    }
-    catch (error: any) {
-        res.status(400).json({ message: error.message });
-    }
+    roomController.postOne(req, res);
 });
 
 //Get all Method
@@ -34,13 +25,7 @@ roomRoutes.get('/getAll', async (req, res) => {
 
 //Get by ID Method
 roomRoutes.get('/getOne/:id', async (req, res) => {
-    try{
-        const data = await RoomModel.findById(req.params.id);
-        res.json(data)
-    }
-    catch(error: any){
-        res.status(500).json({ message: error.message })
-    }
+    roomController.getOne(req, res);
 });
 
 //Update by ID Method
