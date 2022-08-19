@@ -4,7 +4,7 @@
   "main": "index.js",
   "author": "Mongark",
   "scripts": {
-    "build": "tsc --project ./",
+    "build": "rm -r -f ./dist && tsc --project ./",
     "start:dev": "nodemon src/server.ts",
     "start:prod": "node dist/server.js"
   },
