@@ -2,16 +2,16 @@ import express, { json } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-import addToLogs from './logging/logger.js';
-import RoomRoutes from './routes/roomRouter.js';
-import GuestRoutes from './routes/guestRouter.js';
+import addToLogs from './logging/logger';
+import RoomRoutes from './routes/roomRouter';
+import GuestRoutes from './routes/guestRouter';
 
 dotenv.config();
 
 console.log(process.env.STARTUP_MSG);
 
 addToLogs('Loading MongoDB database url...');
-const mongodb_url = process.env.DATABASE_URL;
+const mongodb_url: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL;
 
 addToLogs('Connecting to MongoDB with URL and creating database client instance...');
 mongoose.connect(mongodb_url);
