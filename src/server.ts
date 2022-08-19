@@ -42,6 +42,6 @@ database.once('connected', () => {
     addToLogs('Loading of routes completed!');
 
     app.listen(process.env.API_PORT, () => {
-        addToLogs(`Server started at ${process.env.API_PORT}`)
+        addToLogs(`Server started at ${process.env.API_PORT}`);
     });
 });
