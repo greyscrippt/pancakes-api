@@ -14,10 +14,10 @@ guestRoutes.post('/post', async(req, res) => {
 
     try {
         const dataToSave = data.save();
-        res.status(200).json(dataToSave);
+        res.status(200).json( dataToSave );
     }
     catch (error: any) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 });
 
@@ -39,7 +39,7 @@ guestRoutes.get('/getOne/:id', async (req, res) => {
         res.json(data)
     }
     catch(error: any){
-        res.status(500).json({message: error.message})
+        res.status(500).json({ message: error.message })
     }
 });
 
@@ -54,7 +54,7 @@ guestRoutes.patch('/update/:id', async (req, res) => {
             id, updatedData, options
         )
 
-        res.send(result)
+        res.send( result )
     }
     catch (error: any) {
         res.status(400).json({ message: error.message })

@@ -12,7 +12,7 @@ const monad = (logHistory: LogType[], currentMsg: string) => {
 
     console.log(
         'Stage ' + currentLogId + ': ' +
-        currentLogId,
+        currentMsg,
     );
 
     const newLogHistory: LogType[] =  [
@@ -22,6 +22,7 @@ const monad = (logHistory: LogType[], currentMsg: string) => {
 
     return newLogHistory;
 };
+
 var logs: LogType[] = [];
 const addToLogs = (msg: string) => (logs = monad(logs, msg));
 

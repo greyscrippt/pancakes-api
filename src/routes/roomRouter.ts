@@ -17,7 +17,7 @@ roomRoutes.post('/post', async(req, res) => {
         res.status(200).json(dataToSave);
     }
     catch (error: any) {
-        res.status(400).json({message: error.message});
+        res.status(400).json({ message: error.message });
     }
 });
 
@@ -39,7 +39,7 @@ roomRoutes.get('/getOne/:id', async (req, res) => {
         res.json(data)
     }
     catch(error: any){
-        res.status(500).json({message: error.message})
+        res.status(500).json({ message: error.message })
     }
 });
 

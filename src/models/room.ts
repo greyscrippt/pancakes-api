@@ -1,9 +1,9 @@
-import mongoose from "mongoose"
+import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema({
     name: {
         required: true,
-        type: String
+        type: String,
     },
 })
 

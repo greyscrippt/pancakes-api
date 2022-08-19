@@ -11,7 +11,7 @@ dotenv.config();
 console.log(process.env.STARTUP_MSG);
 
 addToLogs('Loading MongoDB database url...');
-const mongodb_url: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL;
+const mongodb_url: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL; // TODO: find more elegant solution to this line.
 
 addToLogs('Connecting to MongoDB with URL and creating database client instance...');
 mongoose.connect(mongodb_url);
@@ -24,9 +24,7 @@ database.on('error', (error) => {
 
 
 database.once('connected', () => {
-    addToLogs('Database connection established!');
-
-    addToLogs('Initializing API server.');
+    addToLogs('Database connection established! Initializing API server...');
 
     addToLogs('Creating express instance...');
     const app = express();
@@ -43,7 +41,7 @@ database.once('connected', () => {
 
     addToLogs('Loading of routes completed!');
 
-    app.listen(3000, () => {
-        addToLogs(`Server started at ${3000}`)
+    app.listen(process.env.API_PORT, () => {
+        addToLogs(`Server started at ${process.env.API_PORT}`)
     });
 });
