@@ -14,13 +14,7 @@ roomRoutes.post('/post', async(req, res) => {
 
 //Get all Method
 roomRoutes.get('/getAll', async (req, res) => {
-    try{
-        const data = await RoomModel.find();
-        res.json(data)
-    }
-    catch(error: any){
-        res.status(500).json({ message: error.message })
-    }
+    roomController.getAll(req, res);
 });
 
 //Get by ID Method
