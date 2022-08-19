@@ -2,7 +2,7 @@
 
 import express from "express";
 
-import RoomModel from '../models/room.js';
+import RoomModel from '../models/room';
 
 const roomRoutes = express.Router();
 
@@ -16,7 +16,7 @@ roomRoutes.post('/post', async(req, res) => {
         const dataToSave = data.save();
         res.status(200).json(dataToSave);
     }
-    catch (error) {
+    catch (error: any) {
         res.status(400).json({message: error.message});
     }
 });
@@ -27,7 +27,7 @@ roomRoutes.get('/getAll', async (req, res) => {
         const data = await RoomModel.find();
         res.json(data)
     }
-    catch(error){
+    catch(error: any){
         res.status(500).json({ message: error.message })
     }
 });
@@ -38,7 +38,7 @@ roomRoutes.get('/getOne/:id', async (req, res) => {
         const data = await RoomModel.findById(req.params.id);
         res.json(data)
     }
-    catch(error){
+    catch(error: any){
         res.status(500).json({message: error.message})
     }
 });
@@ -56,7 +56,7 @@ roomRoutes.patch('/update/:id', async (req, res) => {
 
         res.send(result)
     }
-    catch (error) {
+    catch (error: any) {
         res.status(400).json({ message: error.message })
     }
 });
@@ -66,9 +66,9 @@ roomRoutes.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await RoomModel.findByIdAndDelete(id)
-        res.send(`Document with ${data.name} has been deleted..`)
+        res.send(data)
     }
-    catch (error) {
+    catch (error: any) {
         res.status(400).json({ message: error.message })
     }
 });

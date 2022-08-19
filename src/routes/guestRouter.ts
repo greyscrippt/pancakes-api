@@ -2,7 +2,7 @@
 
 import express from "express";
 
-import GuestModel from '../models/guest.js';
+import GuestModel from '../models/guest';
 
 const guestRoutes = express.Router();
 
@@ -16,7 +16,7 @@ guestRoutes.post('/post', async(req, res) => {
         const dataToSave = data.save();
         res.status(200).json(dataToSave);
     }
-    catch (error) {
+    catch (error: any) {
         res.status(400).json({message: error.message});
     }
 });
@@ -27,7 +27,7 @@ guestRoutes.get('/getAll', async (req, res) => {
         const data = await GuestModel.find();
         res.json(data)
     }
-    catch(error){
+    catch(error: any){
         res.status(500).json({ message: error.message })
     }
 });
@@ -38,7 +38,7 @@ guestRoutes.get('/getOne/:id', async (req, res) => {
         const data = await GuestModel.findById(req.params.id);
         res.json(data)
     }
-    catch(error){
+    catch(error: any){
         res.status(500).json({message: error.message})
     }
 });
@@ -56,7 +56,7 @@ guestRoutes.patch('/update/:id', async (req, res) => {
 
         res.send(result)
     }
-    catch (error) {
+    catch (error: any) {
         res.status(400).json({ message: error.message })
     }
 });
@@ -66,9 +66,9 @@ guestRoutes.delete('/delete/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const data = await GuestModel.findByIdAndDelete(id)
-        res.send(`Document with ${data.name} has been deleted..`)
+        res.send(data);
     }
-    catch (error) {
+    catch (error: any) {
         res.status(400).json({ message: error.message })
     }
 });
