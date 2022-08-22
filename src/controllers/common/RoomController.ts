@@ -1,5 +1,5 @@
 import express from "express";
-import RoomModel from "../models/room";
+import RoomModel from "../../models/common/room";
 
 async function getOne(req: express.Request, res: express.Response) {
     try{

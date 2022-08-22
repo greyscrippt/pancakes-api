@@ -2,8 +2,8 @@
 
 import express from "express";
 
-import RoomModel from '../models/room';
-import * as roomController from '../controllers/RoomController';
+import RoomModel from '../../models/common/room';
+import * as roomController from '../../controllers/common/RoomController';
 
 const roomRoutes = express.Router();
 

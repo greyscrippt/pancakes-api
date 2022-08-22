@@ -2,7 +2,7 @@
 
 import express from "express";
 
-import GuestModel from '../models/guest';
+import GuestModel from '../../models/common/guest';
 
 const guestRoutes = express.Router();
 

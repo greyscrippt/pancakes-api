@@ -3,8 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import addToLogs from './logging/logger';
-import RoomRoutes from './routes/roomRouter';
-import GuestRoutes from './routes/guestRouter';
+import RoomRoutes from './routes/common/roomRouter';
+import GuestRoutes from './routes/common/guestRouter';
 
 dotenv.config();
 
