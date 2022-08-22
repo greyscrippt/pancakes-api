@@ -23,28 +23,14 @@ roomRoutes.get('/getOne/:id', async (req, res) => {
 });
 
 //Update by ID Method
-roomRoutes.patch('/update/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const updatedData = req.query;
-        const options = { new: true };
-
-        const result = await RoomModel.findByIdAndUpdate(
-            id, updatedData, options
-        )
-
-        res.send(result)
-    }
-    catch (error: any) {
-        res.status(400).json({ message: error.message })
-    }
+roomRoutes.patch('/update/:id', async (req, res, next) => {
+    roomController.updateById(req, res, next);
 });
 
 //Delete by ID Method
-roomRoutes.delete('/delete/:id', async (req, res) => {
+roomRoutes.delete('/delete/', async (req, res) => {
     try {
-        const id = req.params.id;
-        const data = await RoomModel.findByIdAndDelete(id)
+        const data = await RoomModel.findByIdAndDelete(req.body.id)
         res.send(data)
     }
     catch (error: any) {

@@ -17,6 +17,8 @@ addToLogs('Connecting to MongoDB with URL and creating database client instance.
 mongoose.connect(mongodb_url);
 const database = mongoose.connection;
 
+const masterRouter = express.Router();
+
 
 database.on('error', (error) => {
     addToLogs(error);
@@ -34,10 +36,12 @@ database.once('connected', () => {
     addToLogs('Loading API routes...');
 
     addToLogs('--Loading rooms routes...'); // TODO: check if this log is elegant
-    app.use('/rooms', RoomRoutes);
+    masterRouter.use('/rooms', RoomRoutes);
 
     addToLogs('--Loading guests routes...'); // TODO: check if this log is elegant
-    app.use('/guests', GuestRoutes);
+    masterRouter.use('/guests', GuestRoutes);
+
+    app.use('/api', masterRouter);
 
     addToLogs('Loading of routes completed!');
 

@@ -35,8 +35,26 @@ async function postOne(req: express.Request, res: express.Response) {
     }
 }
 
+async function updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+        const id = req.params.id;
+        const updatedData = req.query;
+        const options = { new: true };
+
+        const result = await RoomModel.findByIdAndUpdate(
+            id, updatedData, options
+        )
+
+        res.send(result)
+    }
+    catch (error: any) {
+        res.status(400).json({ message: error.message })
+    }
+}
+
 export {
     getOne,
     getAll,
     postOne,
+    updateById,
 };
