@@ -9,3 +9,10 @@ run-dev:
 # start MongoDB docker container
 start-mongodb-container:
     sudo docker run -d -p 27017:27017 mongo
+
+test-endpoints:
+    curl "http://localhost:3000/api/pix/test"
+    
+    curl -X GET -H "Content-Type: application/json" \
+            -d '{"username":"abc","password":"abc"}' \
+            "http://localhost:3000/api/pix/qrcode"

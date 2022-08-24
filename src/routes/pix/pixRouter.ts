@@ -6,8 +6,14 @@ import * as GerenciaNetController from '../../controllers/pix/GerenciaNetControl
 
 const PixRouter = Router();
 
+// Testar endpoint.
+PixRouter.get('/test', async(req, res) => {
+    res.send("Hello, world!\n");
+});
+
 // Gerar boleto.
 PixRouter.post('/boleto', async(req, res) => {
+    res.send("Helloww");
 });
 
 // Gerar QR code.
