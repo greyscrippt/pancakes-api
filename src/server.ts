@@ -5,7 +5,6 @@ import dotenv from 'dotenv';
 import addToLogs from './logging/logger';
 import RoomRoutes from './routes/common/roomRouter';
 import GuestRoutes from './routes/common/guestRouter';
-import PixRouter from './routes/pix/pixRouter';
 
 dotenv.config();
 
@@ -41,9 +40,6 @@ database.once('connected', () => {
 
     addToLogs('--Loading guests routes...'); // TODO: check if this log is elegant
     masterRouter.use('/guests', GuestRoutes);
-
-    addToLogs('--Loading PIX routes...'); // TODO: check if this log is elegant
-    masterRouter.use('/pix', PixRouter);
 
     app.use('/api', masterRouter);
 
