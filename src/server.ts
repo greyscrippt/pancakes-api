@@ -4,7 +4,6 @@ import dotenv from 'dotenv';
 
 import addToLogs from './logging/logger';
 import RoomRoutes from './routes/common/roomRouter';
-import GuestRoutes from './routes/common/guestRouter';
 
 dotenv.config();
 
@@ -37,9 +36,6 @@ database.once('connected', () => {
 
     addToLogs('--Loading rooms routes...'); // TODO: check if this log is elegant
     masterRouter.use('/rooms', RoomRoutes);
-
-    addToLogs('--Loading guests routes...'); // TODO: check if this log is elegant
-    masterRouter.use('/guests', GuestRoutes);
 
     app.use('/api', masterRouter);
 
