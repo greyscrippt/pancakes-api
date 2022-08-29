@@ -10,10 +10,10 @@ dotenv.config();
 console.log(process.env.STARTUP_MSG);
 
 addToLogs('Loading MongoDB database url...');
-const mongodb_url: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL; // TODO: find more elegant solution to this line.
+const MONGO_URL: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL; // TODO: find more elegant solution to this line.
 
 addToLogs('Connecting to MongoDB with URL and creating database client instance...');
-mongoose.connect(mongodb_url);
+mongoose.connect(MONGO_URL);
 const database = mongoose.connection;
 
 const masterRouter = express.Router();
