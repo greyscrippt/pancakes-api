@@ -4,7 +4,8 @@
   "main": "index.js",
   "author": "Mongark",
   "scripts": {
-    "build": "rm -r -f ./dist && tsc --project ./",
+    "build:tsc": "rm -r -f ./dist && tsc --project ./",
+    "build:webpack": "webpack",
     "start:dev": "nodemon src/server.ts",
     "start:prod": "node dist/server.js",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
