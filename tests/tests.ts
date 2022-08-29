@@ -17,16 +17,17 @@ describe("Connection test", () => {
 
 describe("Endpoint test for RoomController.getCount()", () => {
     it("should return true", donne => {
-      axios
-          .get(API_URL+"rooms/getCount")
-              .then((result1) => {
-                  axios
+        axios
+            .get(API_URL+"rooms/getCount")
+            .then((result1) => {
+                axios
                     .get(API_URL+"rooms/getAll")
                         .then((result2) => {
                             expect(result1).to.equal(result2.data.length);
                         });
 
-                  donne();
-              }).catch(error => donne(error));
+                donne();
+            }).catch(error => donne(error));
     });
   });
+
