@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Mongark",
+  "license": "",
   "scripts": {
     "build:tsc": "rm -r -f ./dist && tsc --project ./",
     "build:webpack": "webpack",
