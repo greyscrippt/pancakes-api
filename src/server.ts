@@ -34,6 +34,9 @@ database.once('connected', () => {
 
     addToLogs('Loading API routes...');
 
+    addToLogs('--Loading ping endpoint...'); // TODO: check if this log is elegant
+    masterRouter.use('/ping', (req, res) => res.send("pong"));
+
     addToLogs('--Loading rooms routes...'); // TODO: check if this log is elegant
     masterRouter.use('/rooms', RoomRoutes);
 
