@@ -62,7 +62,18 @@ async function updateById(req: express.Request, res: express.Response, next: exp
     }
 }
 
+async function deleteOne(req: express.Request, res: express.Response) {
+    try{
+        const data = await RoomModel.deleteOne({ name: req.params.id });
+        res.json(data)
+    }
+    catch(error: any){
+        res.status(500).json({ message: error.message })
+    }
+}
+
 export {
+    deleteOne,
     getOne,
     getAll,
     getCount,
