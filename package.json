@@ -7,7 +7,8 @@
     "build": "rm -r -f ./dist && tsc --project ./",
     "start:dev": "nodemon src/server.ts",
     "start:prod": "node dist/server.js",
-    "lint": "tslint -c tslint.json -p tsconfig.json --fix"
+    "lint": "tslint -c tslint.json -p tsconfig.json --fix",
+    "test": "mocha -r ts-node/register tests/*.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
