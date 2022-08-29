@@ -4,10 +4,8 @@ import "mocha";
 
 const API_URL = "localhost:3000/api/";
 
-describe("Testing endpoint /rooms/getAll", () => {
+describe("Testing endpoint /rooms/getCount", () => {
   it("should return all rooms", () => {
-    axios.get(API_URL+"rooms/getAll");
-
     expect(true).to.equal(true);
   });
 });

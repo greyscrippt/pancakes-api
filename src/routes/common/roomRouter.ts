@@ -17,6 +17,11 @@ roomRoutes.get('/getAll', async (req, res) => {
     roomController.getAll(req, res);
 });
 
+// Get count Method
+roomRoutes.get('/getCount', async (req, res) => {
+    roomController.getCount(req, res);
+});
+
 // Get by ID Method
 roomRoutes.get('/getOne/:id', async (req, res) => {
     roomController.getOne(req, res);

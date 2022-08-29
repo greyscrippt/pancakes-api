@@ -11,6 +11,16 @@ async function getOne(req: express.Request, res: express.Response) {
     }
 }
 
+async function getCount(req: express.Request, res: express.Response) {
+    try{
+        const count = await RoomModel.count();
+        res.json(count)
+    }
+    catch(error: any){
+        res.status(500).json({ message: error.message })
+    }
+}
+
 async function getAll(req: express.Request, res: express.Response) {
     try{
         const data = await RoomModel.find();
@@ -55,6 +65,7 @@ async function updateById(req: express.Request, res: express.Response, next: exp
 export {
     getOne,
     getAll,
+    getCount,
     postOne,
     updateById,
 };
