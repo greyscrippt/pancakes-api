@@ -23,7 +23,7 @@ const monad = (logHistory: LogType[], currentMsg: string) => {
     return newLogHistory;
 };
 
-var logs: LogType[] = [];
+let logs: LogType[] = [];
 const addToLogs = (msg: string) => (logs = monad(logs, msg));
 
 export default addToLogs;

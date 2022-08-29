@@ -19,7 +19,7 @@ async function getAll(req: express.Request, res: express.Response) {
     catch(error: any){
         res.status(500).json({ message: error.message })
     }
-}    
+}
 
 async function postOne(req: express.Request, res: express.Response) {
     const data = new RoomModel({
