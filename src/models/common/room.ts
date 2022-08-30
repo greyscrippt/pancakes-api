@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
 
 const roomSchema = new mongoose.Schema({
-    name: {
-        required: true,
-        type: String,
-    },
+    name: mongoose.SchemaTypes.String
 })
 
  const RoomModel = mongoose.model('Room', roomSchema);

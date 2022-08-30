@@ -10,7 +10,7 @@
     "start:dev": "nodemon src/server.ts --ignore tests/",
     "start:prod": "node dist/server.js",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "test": "mocha -r ts-node/register tests/*.ts --watch"
+    "test": "mocha -r ts-node/register tests/tests.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
