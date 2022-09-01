@@ -14,7 +14,6 @@ async function getOne( req: express.Request, res: express.Response ) {
 
 async function getCount(req: express.Request, res: express.Response) {
     try{
-        //const data = await RoomModel.count();
         const data = await RoomService.getCount();
 
         res.status(200).json(data)
@@ -46,6 +45,7 @@ async function postOne(req: express.Request, res: express.Response) {
     }
 }
 
+// TODO: Migrate this to RoomService.
 async function updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
         const id = req.params.id;
