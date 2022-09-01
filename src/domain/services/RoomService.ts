@@ -4,7 +4,7 @@ const deleteOne = async( id: string ) => {
     try {
         return RoomModel.findByIdAndDelete(id);
     } catch (error) {
-        
+        return( error );
     }
 };
 
@@ -26,7 +26,9 @@ const getAll = async() => {
 
 const getCount = async() => {
     try {
-        return RoomModel.count;
+        const count = await RoomModel.count();
+
+        return count;
     } catch ( error ) {
         return( error );
     }
@@ -43,13 +45,10 @@ const postOne = async( dt: any ) => {
     }
 };
 
-const updateById = async() => {};
-
 export {
     deleteOne,
     getOne,
     getAll,
     getCount,
     postOne,
-    updateById,
 };
