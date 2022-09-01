@@ -4,7 +4,7 @@ import RoomModel from "../../models/common/room";
 async function getOne(req: express.Request, res: express.Response) {
     try{
         const data = await RoomModel.findById(req.params.id);
-        res.json(data)
+        res.status(200).json(data)
     }
     catch(error: any){
         res.status(500).json({ message: error.message })
@@ -14,7 +14,7 @@ async function getOne(req: express.Request, res: express.Response) {
 async function getCount(req: express.Request, res: express.Response) {
     try{
         const count = await RoomModel.count();
-        res.json(count)
+        res.status(200).json(count)
     }
     catch(error: any){
         res.status(500).json({ message: error.message })
@@ -24,7 +24,7 @@ async function getCount(req: express.Request, res: express.Response) {
 async function getAll(req: express.Request, res: express.Response) {
     try{
         const data = await RoomModel.find();
-        res.json(data)
+        res.status(200).json(data)
     }
     catch(error: any){
         res.status(500).json({ message: error.message })
@@ -41,7 +41,7 @@ async function postOne(req: express.Request, res: express.Response) {
         res.status(200).json(dataToSave);
     }
     catch (error: any) {
-        res.status(400).json({ message: error.message });
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -55,17 +55,17 @@ async function updateById(req: express.Request, res: express.Response, next: exp
             id, updatedData, options
         )
 
-        res.send(result)
+        res.status(200).send(result)
     }
     catch (error: any) {
-        res.status(400).json({ message: error.message })
+        res.status(500).json({ message: error.message })
     }
 }
 
 async function deleteOne(req: express.Request, res: express.Response) {
     try{
         await RoomModel.deleteOne({ name: req.params.id });
-        res.json(req.params.id)
+        res.status(200).json(req.params.id)
     }
     catch(error: any){
         res.status(500).json({ message: error.message })
