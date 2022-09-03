@@ -2,6 +2,8 @@ import { assert, expect, should } from "chai";
 import axios, { AxiosResponse } from "axios";
 import "mocha";
 
+import RoomModel from "../src/models/common/room";
+
 const API_URL = "http://localhost:3000/api/";
 
 const config = {
@@ -81,6 +83,27 @@ describe("RoomController.getCount()", () => {
 
                         donne();
                     }).catch((err) => donne(err));
+            }).catch((err) => donne(err));
+    });
+});
+
+describe("RoomController.postOne()", () => {
+
+    it("should return a 200 code", donne => {
+        axios.post( API_URL+"rooms/post", { name: "My Very Own Test" } )
+            .then(( res ) => {
+                assert.equal( res.status, 200 );
+                donne();
+            }).catch((err) => donne(err));
+    });
+
+    it("should return a typeof 'object' with an 'id'", donne => {
+        axios.post( API_URL+"rooms/post", { name: "My Very Own Test 2" } )
+            .then(( res ) => {
+                assert.equal( typeof res.data, "object" );
+                assert.equal( typeof res.data.id, "string" );
+
+                donne();
             }).catch((err) => donne(err));
     });
 });

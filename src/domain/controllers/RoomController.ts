@@ -36,13 +36,13 @@ async function getAll(req: express.Request, res: express.Response) {
 
 async function postOne(req: express.Request, res: express.Response) {
     try {
-        const data = RoomService.postOne( req.body );
+        const data = new RoomModel( req.body );
+        const saved = await data.save();
 
-        res.status(200).json( data );
-    }
-    catch (error: any) {
-        res.status(500).json({ message: error.message });
-    }
+        res.status(200).json( { id: saved._id} );
+    } catch( error ) {
+        res.status(500).send( error );
+    };
 }
 
 // TODO: Migrate this to RoomService.

@@ -34,21 +34,9 @@ const getCount = async() => {
     }
 };
 
-const postOne = async( dt: any ) => {
-    try {
-        const data = new RoomModel( dt );
-        const result = data.save();
-
-        return result;
-    } catch (error) {
-        return error;
-    }
-};
-
 export {
     deleteOne,
     getOne,
     getAll,
     getCount,
-    postOne,
 };
