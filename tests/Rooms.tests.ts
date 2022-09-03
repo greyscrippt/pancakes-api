@@ -77,16 +77,23 @@ describe("RoomController.postOne()", async() => {
         data = await axios.post( API_URL+"rooms/post", { name: "My Very Own Test" } );
     });
     
+    
     it("should return a 200 code", donne => {
         assert.equal( data.status, 200 );
         donne();
     });
+
     it("the result data should be of type 'object'", donne => {
         assert.equal( typeof data.data, "object" );
         donne();
     });
+
     it("the result data.id should be of type 'string'", donne => {
         assert.equal( typeof data.data.id, "string" );
         donne();
     });
 });
+
+describe("RoomController.updateById()", () => {});
+
+describe("RoomController.deleteOne()", () => {});
