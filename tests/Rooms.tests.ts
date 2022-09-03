@@ -89,21 +89,23 @@ describe("RoomController.getCount()", () => {
 
 describe("RoomController.postOne()", () => {
 
-    it("should return a 200 code", donne => {
+    describe("connect", () => {
         axios.post( API_URL+"rooms/post", { name: "My Very Own Test" } )
             .then(( res ) => {
-                assert.equal( res.status, 200 );
-                donne();
-            }).catch((err) => donne(err));
-    });
 
-    it("should return a typeof 'object' with an 'id'", donne => {
-        axios.post( API_URL+"rooms/post", { name: "My Very Own Test 2" } )
-            .then(( res ) => {
-                assert.equal( typeof res.data, "object" );
-                assert.equal( typeof res.data.id, "string" );
+                it("should return a 200 code", donne => {
+                    assert.equal( res.status, 200 );
+                    donne();
+                });
+                it("the result data should be of type 'object'", donne => {
+                    assert.equal( typeof res.data, "object" );
+                    donne();
+                });
+                it("the result data.id should be of type 'string'", donne => {
+                    assert.equal( typeof res.data.id, "string" );
+                    donne();
+                });
 
-                donne();
-            }).catch((err) => donne(err));
+            }).catch((err) => err);
     });
 });
