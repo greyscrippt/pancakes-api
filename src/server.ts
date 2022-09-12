@@ -2,6 +2,8 @@ import express, { json } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
+import cors from 'cors';
+
 import addToLogs from './logging/logger';
 import RoomRoutes from './routes/common/roomRouter';
 
@@ -29,7 +31,8 @@ database.once('connected', () => {
 
     addToLogs('Creating express instance...');
     const app = express();
-    app.use(json());
+    app.use( json() );
+    app.use( cors() );
     addToLogs('Express instance created sucessfully!');
 
     addToLogs('Loading API routes...');
