@@ -16,7 +16,7 @@ const getOne = async( id: string ) => {
     }
 };
 
-const getAll = async() => {
+const getMany = async() => {
     try {
         return RoomModel.find();
     } catch ( error ) {
@@ -26,9 +26,7 @@ const getAll = async() => {
 
 const getCount = async() => {
     try {
-        const count = await RoomModel.count();
-
-        return count;
+        return await RoomModel.count();
     } catch ( error ) {
         return( error );
     }
@@ -37,6 +35,6 @@ const getCount = async() => {
 export {
     deleteOne,
     getOne,
-    getAll,
+    getMany,
     getCount,
 };

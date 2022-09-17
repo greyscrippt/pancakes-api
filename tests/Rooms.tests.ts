@@ -28,7 +28,7 @@ describe("RoomController.getAll()", () => {
     let data: AxiosResponse<any, any>;
 
     beforeEach(async() => {
-        data = await axios.get( API_URL+"rooms/getAll" );
+        data = await axios.get( API_URL+"rooms/getMany" );
     });
 
     it("should return a 200 code", donne => {
@@ -49,11 +49,17 @@ describe("RoomController.getCount()", () => {
 
     beforeEach(async() => {
         count = await axios.get( API_URL+"rooms/getCount" );
-        count2 = await axios.get( API_URL+"rooms/getAll" );
+        count2 = await axios.get( API_URL+"rooms/getMany" );
     });
 
-    it("should return a 200 code", donne => {
+    it("should return a 200 code on getCount", donne => {
         assert.equal( count.status, 200 );
+        donne();
+    });
+    
+
+    it("should return a 200 code on getMany", donne => {
+        assert.equal( count2.status, 200 );
         donne();
     });
 
