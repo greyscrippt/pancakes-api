@@ -4,14 +4,14 @@ import "mocha";
 
 const API_URL = "http://localhost:3000/api/";
 
-const config = {
-};
-
-const client = axios(config);
-
 describe("Connection test", async() => {
-    const data = await axios.get( API_URL+"ping/" );
+    let data: AxiosResponse<any, any>;
 
+    beforeEach(async() => {
+        data = await axios.get( API_URL+"ping" );
+        console.log( data.data );
+    });
+    
     it("should return a 200 code", donne => {
         assert.equal( data.status, 200 );
         donne();
@@ -20,6 +20,7 @@ describe("Connection test", async() => {
     it("should return pong", donne => {
         assert.notEqual( data.data, undefined );
         assert.equal( data.data, "pong" );
+        donne();
     });
 });
 
