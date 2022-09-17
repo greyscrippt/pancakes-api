@@ -1,6 +1,5 @@
-import { assert, expect, should } from "chai";
+import { assert } from "chai";
 import axios, { AxiosResponse } from "axios";
-import "mocha";
 
 const API_URL = "http://localhost:3000/api/";
 
@@ -103,7 +102,7 @@ describe("RoomController.postOne()", async() => {
     beforeEach(async() => {
         data = await axios.post( API_URL+"rooms/post", { name: "My Very Own Test" } );
     });
-    
+
     
     it("data shouldn't be of type 'undefined'", donne => {
         assert.notEqual( data, undefined );
