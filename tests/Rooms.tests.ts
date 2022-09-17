@@ -11,6 +11,11 @@ describe("Connection test", async() => {
         data = await axios.get( API_URL+"ping" );
         console.log( data.data );
     });
+
+    it("data shouldn't be of type 'undefined'", donne => {
+        assert.notEqual( data, undefined );
+        donne();
+    });
     
     it("should return a 200 code", donne => {
         assert.equal( data.status, 200 );
@@ -29,6 +34,11 @@ describe("RoomController.getAll()", () => {
 
     beforeEach(async() => {
         data = await axios.get( API_URL+"rooms/getMany" );
+    });
+
+    it("data shouldn't be of type 'undefined'", donne => {
+        assert.notEqual( data, undefined );
+        donne();
     });
 
     it("should return a 200 code", donne => {
@@ -50,6 +60,16 @@ describe("RoomController.getCount()", () => {
     beforeEach(async() => {
         count = await axios.get( API_URL+"rooms/getCount" );
         count2 = await axios.get( API_URL+"rooms/getMany" );
+    });
+
+    it("count shouldn't be of type 'undefined'", donne => {
+        assert.notEqual( count, undefined );
+        donne();
+    });
+
+    it("count2 shouldn't be of type 'undefined'", donne => {
+        assert.notEqual( count2, undefined );
+        donne();
     });
 
     it("should return a 200 code on getCount", donne => {
@@ -84,6 +104,11 @@ describe("RoomController.postOne()", async() => {
         data = await axios.post( API_URL+"rooms/post", { name: "My Very Own Test" } );
     });
     
+    
+    it("data shouldn't be of type 'undefined'", donne => {
+        assert.notEqual( data, undefined );
+        donne();
+    });
     
     it("should return a 200 code", donne => {
         assert.equal( data.status, 200 );
