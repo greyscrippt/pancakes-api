@@ -33,7 +33,7 @@ RoomRoutes.get('/getCount', async (req, res) => {
 });
 
 // Get by ID Method
-RoomRoutes.get('/getOne/:id', async (req, res) => {
+RoomRoutes.get('/getOneById/:id', async (req, res) => {
     try {
         RoomController.getOne(req, res);
     } catch ( error ) {
