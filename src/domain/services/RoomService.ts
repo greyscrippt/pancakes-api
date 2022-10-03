@@ -1,8 +1,8 @@
 import RoomModel from "../../data/models/RoomModel";
 
-const deleteOne = ( id: string ) => {
+const deleteOneById = ( id: string ) => {
     try {
-        return RoomModel.findByIdAndDelete(id);
+        return RoomModel.findByIdAndDelete( id );
     } catch (error) {
         return( error );
     }
@@ -33,8 +33,8 @@ const getCount = () => {
 };
 
 export {
-    deleteOne,
+    deleteOneById,
     getOne,
-    getAll as getMany,
+    getAll,
     getCount,
 };

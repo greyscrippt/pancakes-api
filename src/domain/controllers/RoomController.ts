@@ -25,7 +25,7 @@ async function getCount(req: express.Request, res: express.Response) {
 
 async function getAll(req: express.Request, res: express.Response) {
     try{
-        const data = await RoomService.getMany();
+        const data = await RoomService.getAll();
 
         res.status(200).json(data)
     }
@@ -46,7 +46,7 @@ async function postOne(req: express.Request, res: express.Response) {
 }
 
 // TODO: Migrate this to RoomService.
-async function updateById(req: express.Request, res: express.Response, next: express.NextFunction) {
+async function updateOneById(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
         const id = req.params.id;
         const updatedData = req.query;
@@ -71,9 +71,9 @@ async function updateById(req: express.Request, res: express.Response, next: exp
     }
 }
 
-async function deleteOne(req: express.Request, res: express.Response) {
+async function deleteOneById(req: express.Request, res: express.Response) {
     try{
-        const result = RoomService.deleteOne(req.params.id);
+        const result = await RoomService.deleteOneById(req.params.id);
 
         res.status(200).send(result);
     }
@@ -83,12 +83,12 @@ async function deleteOne(req: express.Request, res: express.Response) {
 }
 
 const RoomController = {
-    deleteOne,
+    deleteOneById,
     getOne,
     getAll,
     getCount,
     postOne,
-    updateById,
+    updateOneById,
 };
 
 export default RoomController;

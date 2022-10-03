@@ -7,7 +7,7 @@ describe("RoomController.postOne()", async() => {
     let data: AxiosResponse<any, any>;
 
     beforeEach(async() => {
-        data = await axios.post( API_URL+"rooms/post", { name: "My Very Own Test" } );
+        data = await axios.post( API_URL+"rooms/postOne", { name: "My Very Own Test" } );
     });
 
     

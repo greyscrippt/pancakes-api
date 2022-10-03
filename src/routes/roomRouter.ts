@@ -1,12 +1,13 @@
 // TODO: organize json payload in CRUD
 
-import express from "express";
+import express, { Request, Response } from "express";
 import RoomController from "../domain/controllers/RoomController";
 
 const RoomRoutes = express.Router();
 
 // Post Method
-RoomRoutes.post('/post', async(req, res) => {
+RoomRoutes.post('/postOne', async(req, res) => {
+    console.log("[ ROOM ][ postOne ]: ");
     try {
         RoomController.postOne(req, res);
     } catch (error) {
@@ -16,6 +17,7 @@ RoomRoutes.post('/post', async(req, res) => {
 
 // Get all Method
 RoomRoutes.get('/getAll', async (req, res) => {
+    console.log("[ ROOM ][ getAll ]: ");
     try {
         RoomController.getAll(req, res);
     } catch ( error ) {
@@ -25,6 +27,7 @@ RoomRoutes.get('/getAll', async (req, res) => {
 
 // Get count of document in Room collection in the database.
 RoomRoutes.get('/getCount', async (req, res) => {
+    console.log("[ ROOM ][ getCount ]");
     try {
         RoomController.getCount(req, res);
     } catch (error) {
@@ -34,6 +37,7 @@ RoomRoutes.get('/getCount', async (req, res) => {
 
 // Get by ID Method
 RoomRoutes.get('/getOneById/:id', async (req, res) => {
+    console.log("[ ROOM ][ getOneById ]: "+req.params.id);
     try {
         RoomController.getOne(req, res);
     } catch ( error ) {
@@ -43,17 +47,19 @@ RoomRoutes.get('/getOneById/:id', async (req, res) => {
 
 // Update by ID Method
 RoomRoutes.patch('/update/:id', async (req, res, next) => {
+    console.log("[ ROOM ][ updateOneById ]: "+req.params.id);
     try {
-        RoomController.updateById(req, res, next);
+        RoomController.updateOneById(req, res, next);
     } catch ( error ) {
         res.send( error );
     }
 });
 
-// Delete by ID Method
-RoomRoutes.delete('/delete/', async (req, res) => {
+// Delete one by ID Method
+RoomRoutes.delete('/deleteOneById/:id', async (req: Request, res: Response) => {
+    console.log("[ ROOM ][ deleteOneById ]: "+req.params.id);
     try {
-        RoomController.deleteOne(req, res);
+        RoomController.deleteOneById(req, res);
     } catch ( error ) {
         res.send( error );
     }
