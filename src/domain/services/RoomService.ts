@@ -1,6 +1,6 @@
 import RoomModel from "../../data/models/RoomModel";
 
-const deleteOne = async( id: string ) => {
+const deleteOne = ( id: string ) => {
     try {
         return RoomModel.findByIdAndDelete(id);
     } catch (error) {
@@ -8,7 +8,7 @@ const deleteOne = async( id: string ) => {
     }
 };
 
-const getOne = async( id: string ) => {
+const getOne = ( id: string ) => {
     try {
         return RoomModel.findById( id );
     } catch ( error ) {
@@ -16,7 +16,7 @@ const getOne = async( id: string ) => {
     }
 };
 
-const getMany = async() => {
+const getMany = () => {
     try {
         return RoomModel.find();
     } catch ( error ) {
@@ -24,9 +24,9 @@ const getMany = async() => {
     }
 };
 
-const getCount = async() => {
+const getCount = () => {
     try {
-        return await RoomModel.count();
+        return RoomModel.count();
     } catch ( error ) {
         return( error );
     }

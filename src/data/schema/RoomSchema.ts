@@ -5,8 +5,6 @@ const RoomSchema = new mongoose.Schema({
         required: true,
         type: String,
     },
-})
+});
 
- 
-
- export default RoomSchema;
+export default RoomSchema;

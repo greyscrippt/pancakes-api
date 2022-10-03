@@ -10,7 +10,7 @@
     "webp": "webpack",
     "prod": "node dist/bundle.js",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
-    "test": "mocha -r ts-node/register 'tests/*.test.ts'"
+    "test": "mocha -r ts-node/register 'tests/**/*.test.ts'"
   },
   "dependencies": {
     "dotenv": "^16.0.1",
