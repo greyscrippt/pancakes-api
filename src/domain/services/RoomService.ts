@@ -1,4 +1,4 @@
-import RoomModel from "../../models/common/room";
+import RoomModel from "../../data/models/RoomModel";
 
 const deleteOne = async( id: string ) => {
     try {

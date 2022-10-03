@@ -1,8 +1,7 @@
 // TODO: organize json payload in CRUD
 
 import express from "express";
-
-import * as RoomController from '../../domain/controllers/RoomController';
+import RoomController from "../domain/controllers/RoomController";
 
 const RoomRoutes = express.Router();
 

@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 
 import addToLogs from './logging/logger';
-import RoomRoutes from './routes/common/roomRouter';
+import RoomRoutes from './routes/roomRouter';
 
 dotenv.config();
 

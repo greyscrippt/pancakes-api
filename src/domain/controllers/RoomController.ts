@@ -1,5 +1,5 @@
 import express from "express";
-import RoomModel from "../../models/common/room";
+import RoomModel from "../../data/models/RoomModel";
 import * as RoomService from "../services/RoomService";
 
 async function getOne( req: express.Request, res: express.Response ) {
@@ -74,7 +74,7 @@ async function deleteOne(req: express.Request, res: express.Response) {
     }
 }
 
-export {
+const RoomController = {
     deleteOne,
     getOne,
     getMany,
@@ -82,3 +82,5 @@ export {
     postOne,
     updateById,
 };
+
+export default RoomController;
