@@ -3,11 +3,11 @@ import axios, { AxiosResponse } from "axios";
 
 const API_URL = "http://localhost:3000/api/";
 
-describe("RoomController.getAll()", () => {
+describe("Testing Rooms '/getAll/' endpoint", () => {
     let data: AxiosResponse<any, any>;
 
     beforeEach(async() => {
-        data = await axios.get( API_URL+"rooms/getMany" );
+        data = await axios.get( API_URL+"rooms/getAll" );
     });
 
     it("data shouldn't be of type 'undefined'", donne => {

@@ -23,7 +23,7 @@ async function getCount(req: express.Request, res: express.Response) {
     }
 }
 
-async function getMany(req: express.Request, res: express.Response) {
+async function getAll(req: express.Request, res: express.Response) {
     try{
         const data = await RoomService.getMany();
 
@@ -85,7 +85,7 @@ async function deleteOne(req: express.Request, res: express.Response) {
 const RoomController = {
     deleteOne,
     getOne,
-    getMany,
+    getAll,
     getCount,
     postOne,
     updateById,

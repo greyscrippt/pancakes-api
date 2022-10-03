@@ -15,15 +15,15 @@ RoomRoutes.post('/post', async(req, res) => {
 });
 
 // Get all Method
-RoomRoutes.get('/getMany', async (req, res) => {
+RoomRoutes.get('/getAll', async (req, res) => {
     try {
-        RoomController.getMany(req, res);
+        RoomController.getAll(req, res);
     } catch ( error ) {
         res.send( error );
     }
 });
 
-// Get count Method
+// Get count of document in Room collection in the database.
 RoomRoutes.get('/getCount', async (req, res) => {
     try {
         RoomController.getCount(req, res);

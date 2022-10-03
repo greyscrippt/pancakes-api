@@ -7,7 +7,7 @@ describe("Testing '/getOne' endpoint", () => {
     let data: AxiosResponse<any, any>;
 
     beforeEach(async() => {
-        const sample = await axios.get( API_URL+"rooms/getMany" );
+        const sample = await axios.get( API_URL+"rooms/getAll" );
 
         if( sample.data.length == 0 ) {
             throw "Rooms is an empty array. Please populate the collection before proceding with the test"

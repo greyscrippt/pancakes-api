@@ -16,7 +16,7 @@ const getOne = ( id: string ) => {
     }
 };
 
-const getMany = () => {
+const getAll = () => {
     try {
         return RoomModel.find();
     } catch ( error ) {
@@ -35,6 +35,6 @@ const getCount = () => {
 export {
     deleteOne,
     getOne,
-    getMany,
+    getAll as getMany,
     getCount,
 };

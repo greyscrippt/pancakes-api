@@ -9,7 +9,7 @@ describe("RoomController.getCount()", () => {
 
     beforeEach(async() => {
         count = await axios.get( API_URL+"rooms/getCount" );
-        count2 = await axios.get( API_URL+"rooms/getMany" );
+        count2 = await axios.get( API_URL+"rooms/getAll" );
     });
 
     it("count shouldn't be of type 'undefined'", donne => {
