@@ -5,10 +5,10 @@
   "author": "Mongark",
   "license": "",
   "scripts": {
-    "build:tsc": "rm -r -f ./dist && tsc --project ./",
-    "build:webpack": "webpack",
-    "start:dev": "nodemon src/server.ts --ignore tests/",
-    "start:prod": "node dist/bundle.js",
+    "tsc": "rm -r -f ./dist && tsc --project ./",
+    "dev": "nodemon src/server.ts --ignore tests/",
+    "webp": "webpack",
+    "prod": "node dist/bundle.js",
     "lint": "tslint -c tslint.json -p tsconfig.json --fix",
     "test": "mocha -r ts-node/register 'tests/*.test.ts'"
   },
