@@ -49,7 +49,7 @@ async function postOne(req: express.Request, res: express.Response) {
 async function updateOneById(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
         const id = req.params.id;
-        const updatedData = req.query;
+        const updatedData = req.body;
         const options = { new: true };
 
         if( !id ) {

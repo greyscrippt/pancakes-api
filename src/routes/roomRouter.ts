@@ -46,7 +46,7 @@ RoomRoutes.get('/getOneById/:id', async (req, res) => {
 });
 
 // Update by ID Method
-RoomRoutes.patch('/update/:id', async (req, res, next) => {
+RoomRoutes.patch('/updateOneById/:id', async (req, res, next) => {
     console.log("[ ROOM ][ updateOneById ]: "+req.params.id);
     try {
         RoomController.updateOneById(req, res, next);
