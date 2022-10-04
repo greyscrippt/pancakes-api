@@ -25,4 +25,10 @@ describe("Testing Rooms '/getAll/' endpoint", () => {
         assert.typeOf( data.data, 'array' );
         donne();
     });
+
+    it("should have same size as described in /count/ endpoint", async() => {
+        return await axios.get( API_URL+"rooms/getCount" ).then((res) => {
+            assert.equal( data.data.length, res.data );
+        });
+    });
 });

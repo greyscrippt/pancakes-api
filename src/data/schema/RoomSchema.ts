@@ -5,6 +5,10 @@ const RoomSchema = new mongoose.Schema({
         required: true,
         type: String,
     },
+    number_of_beds: {
+        required: false,
+        type: Number,
+    },
 });
 
 export default RoomSchema;

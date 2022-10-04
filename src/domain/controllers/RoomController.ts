@@ -53,11 +53,11 @@ async function updateOneById(req: express.Request, res: express.Response, next: 
         const options = { new: true };
 
         if( !id ) {
-            throw "No ID is provided for the updateById function";
+            throw new Error("No ID is provided for the updateById function");
         }
 
         if( !updatedData ) {
-            throw "No updated data is provided for the updateById function";
+            throw new Error("No updated data is provided for the updateById function");
         }
 
         const result = await RoomModel.findByIdAndUpdate(

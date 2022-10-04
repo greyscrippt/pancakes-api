@@ -10,12 +10,12 @@ describe("RoomController.postOne()", async() => {
         data = await axios.post( API_URL+"rooms/postOne", { name: "My Very Own Test" } );
     });
 
-    
+
     it("data shouldn't be of type 'undefined'", donne => {
         assert.notEqual( data, undefined );
         donne();
     });
-    
+
     it("should return a 200 code", donne => {
         assert.equal( data.status, 200 );
         donne();
@@ -29,5 +29,13 @@ describe("RoomController.postOne()", async() => {
     it("the result data.id should be of type 'string'", donne => {
         assert.equal( typeof data.data.id, "string" );
         donne();
+    });
+
+    it("the result data should be gettable from /getOne/ endpoint", async() => {
+        const data = axios.post( API_URL+"rooms/postOne", { name: "My Very Own Test" } );
+
+        return await data.then(( res ) => {
+            assert.equal( res.status, 200);
+        });
     });
 });

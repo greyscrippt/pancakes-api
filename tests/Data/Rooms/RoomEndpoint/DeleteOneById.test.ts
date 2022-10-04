@@ -23,14 +23,12 @@ describe("Testing '/deleteOneById' endpoint", () => {
         deleted_data = await axios.delete( API_URL+"rooms/deleteOneById/"+deleted_id);
     });
 
-    it("data shouldn't be of type 'undefined'", donne => {
+    it("data shouldn't be of type 'undefined'", () => {
         assert.notEqual( deleted_data, undefined );
-        donne();
     });
 
-    it("should return a 200 code", donne => {
+    it("should return a 200 code", () => {
         assert.equal( deleted_data.status, 200 );
-        donne();
     });
 
     it("the deleted data shouldn't exist on the database", () => {

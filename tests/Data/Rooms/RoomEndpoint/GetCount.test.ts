@@ -26,13 +26,22 @@ describe("RoomController.getCount()", () => {
         assert.equal( count.status, 200 );
         donne();
     });
-    
 
-    it("should return a 200 code on getMany", donne => {
+
+    it("should return a 200 code on getAll", donne => {
         assert.equal( count2.status, 200 );
         donne();
     });
 
+    it("count.data should not be null", donne => {
+        assert.isNotNull( count.data );
+        donne();
+    });
+
+    it("count2.data should not be null", donne => {
+        assert.isNotNull( count2.data );
+        donne();
+    });
 
     it("should return a number", donne => {
         assert.typeOf( count.data, 'number' );
