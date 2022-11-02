@@ -8,3 +8,9 @@
 5. Notifications system
 6. Payment system
 7. Task automation system
+
+## Endpoints
+1. Guests
+2. Rooms
+3. Accommodations
+4. Booking
