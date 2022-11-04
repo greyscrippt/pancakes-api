@@ -11,7 +11,19 @@ const Controllers: ActionType[] = [
         action: ( model: Model<any> ) => {
             return( ControllerMiddleware.getOneById( model ));
         }
-    }
+    },
+    {
+        type: "DELETE_BY_ID",
+        action: ( model: Model<any> ) => {
+            return( ControllerMiddleware.deleteOneById( model ));
+        }
+    },
+    {
+        type: "UPDATE_BY_ID",
+        action: ( model: Model<any> ) => {
+            return( ControllerMiddleware.updateOneById( model ));
+        }
+    },
 ];
 
 export default Controllers;

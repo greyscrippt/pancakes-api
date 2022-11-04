@@ -1,5 +1,5 @@
 interface EndpointType {
-    body: string,
+    body: any,
     type: string,
 }
 

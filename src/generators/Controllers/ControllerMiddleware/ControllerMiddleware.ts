@@ -18,7 +18,50 @@ const ControllerMiddleware = {
         }
 
         return middleware;
-    }
+    },
+    deleteOneById: (model: Model<any>) => {
+        const middleware = async(req: Request, res: Response, donne: any) => {
+            try {
+                const id = req.params.id;
+                const data = await ServiceFactory.create({ type: "DELETE_BY_ID", body: id }, model);
+                res.status( 200 ).json( data );
+                donne();
+            }
+            catch( error: any ){
+                res.status( 500 ).json({ message: error.message });
+            }
+        }
+
+        return middleware;
+    },
+    updateOneById: (model: Model<any>) => {
+        const middleware = async(req: Request, res: Response) => {
+            try {
+                const id = req.params.id;
+                const updatedData = req.body;
+                const options = { new: true };
+        
+                if( !id ) {
+                    throw new Error("No ID is provided for the updateById function");
+                }
+        
+                if( !updatedData ) {
+                    throw new Error("No updated data is provided for the updateById function");
+                }
+        
+                const body = { id: id, updatedData: updatedData, options: options};
+
+                const result = await ServiceFactory.create({ type: "UPDATE_BY_ID", body: body }, model);
+        
+                res.status(200).send(result)
+            }
+            catch (error: any) {
+                res.status(500).json({ message: error.message })
+            }
+        }
+
+        return middleware;
+    },
 }
 
 export default ControllerMiddleware;

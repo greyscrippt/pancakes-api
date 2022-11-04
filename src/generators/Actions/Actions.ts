@@ -25,6 +25,12 @@ const Actions = [
             return(model.findByIdAndDelete( id ));
         },
     },
+    {
+        type: "UPDATE_BY_ID",
+        action: (model: Model<any>, body: any) => {
+            return(model.findByIdAndUpdate( body.id, body.updatedData, body.options ));
+        },
+    },
 ];
 
 export default Actions;

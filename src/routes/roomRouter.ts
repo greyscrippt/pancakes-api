@@ -56,13 +56,6 @@ RoomRoutes.patch('/updateOneById/:id', async (req: Request, res: Response, next)
 });
 
 // Delete one by ID Method
-RoomRoutes.delete('/deleteOneById/:id', async (req: Request, res: Response) => {
-    console.log("[ ROOM ][ deleteOneById ]: "+req.params.id);
-    try {
-        RoomController.deleteOneById(req, res);
-    } catch ( error ) {
-        res.send( error );
-    }
-});
+RoomRoutes.delete('/deleteOneById/:id', ControllerFactory.create("DELETE_BY_ID", RoomModel));
 
 export default RoomRoutes;
