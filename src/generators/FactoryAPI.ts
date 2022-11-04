@@ -31,6 +31,12 @@ const Actions = [
         },
     },
     {
+        type: "GET_COUNT",
+        action: (model: Model<any>, id: string) => {
+            return(model.count());
+        },
+    },
+    {
         type: "DELETE_BY_ID",
         action: (model: Model<any>, id: string) => {
             return(model.findByIdAndDelete( id ));

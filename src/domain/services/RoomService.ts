@@ -19,7 +19,7 @@ const getOne = ( id: string ) => {
 
 const getAll = () => {
     try {
-        return ServiceFactory.create({ type: "GET_ALL", body: "" }, RoomModel);;
+        return ServiceFactory.create({ type: "GET_ALL", body: "" }, RoomModel);
     } catch ( error ) {
         return( error );
     }
@@ -27,7 +27,7 @@ const getAll = () => {
 
 const getCount = () => {
     try {
-        return RoomModel.count();
+        return ServiceFactory.create({ type: "GET_COUNT", body: "" }, RoomModel);
     } catch ( error ) {
         return( error );
     }
