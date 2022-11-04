@@ -19,9 +19,15 @@ interface Action {
 
 const Actions = [
     {
-        type: "GET_ONEx",
+        type: "GET_BY_ID",
         action: (model: Model<any>, id: string) => {
             return(model.findById( id ));
+        },
+    },
+    {
+        type: "DELETE_BY_ID",
+        action: (model: Model<any>, id: string) => {
+            return(model.findByIdAndDelete( id ));
         },
     },
 ];

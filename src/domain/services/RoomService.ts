@@ -1,9 +1,9 @@
-import { Endpoint, ServiceFactory } from "../../generators/FactoryAPI";
+import { ServiceFactory } from "../../generators/FactoryAPI";
 import RoomModel from "../../data/models/RoomModel";
 
 const deleteOneById = ( id: string ) => {
     try {
-        return RoomModel.findByIdAndDelete( id );
+        return ServiceFactory.create({ type: "DELETE_BY_ID", body: id }, RoomModel);
     } catch (error) {
         return( error );
     }
@@ -11,9 +11,7 @@ const deleteOneById = ( id: string ) => {
 
 const getOne = ( id: string ) => {
     try {
-        const endp: Endpoint = { type: "GET_ONE", body: id }
-
-        return ServiceFactory.create(endp, RoomModel);
+        return ServiceFactory.create({ type: "GET_BY_ID", body: id }, RoomModel);
     } catch ( error ) {
         return( error );
     }
