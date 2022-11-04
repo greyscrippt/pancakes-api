@@ -30,6 +30,12 @@ const Controllers: ActionType[] = [
             return( ControllerMiddleware.getCount( model ));
         }
     },
+    {
+        type: "GET_ALL",
+        action: ( model: Model<any> ) => {
+            return( ControllerMiddleware.getAll( model ));
+        }
+    },
 ];
 
 export default Controllers;

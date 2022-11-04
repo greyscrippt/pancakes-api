@@ -19,14 +19,7 @@ RoomRoutes.post('/postOne', async(req: Request, res: Response) => {
 });
 
 // Get all Method
-RoomRoutes.get('/getAll', async (req: Request, res: Response) => {
-    console.log("[ ROOM ][ getAll ]: ");
-    try {
-        RoomController.getAll(req, res);
-    } catch ( error ) {
-        res.send( error );
-    }
-});
+RoomRoutes.get('/getAll', ControllerFactory.create("GET_ALL", RoomModel));
 
 // Get count of document in Room collection in the database.
 RoomRoutes.get('/getCount', ControllerFactory.create("GET_COUNT", RoomModel));
