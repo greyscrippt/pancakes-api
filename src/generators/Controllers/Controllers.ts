@@ -24,6 +24,12 @@ const Controllers: ActionType[] = [
             return( ControllerMiddleware.updateOneById( model ));
         }
     },
+    {
+        type: "GET_COUNT",
+        action: ( model: Model<any> ) => {
+            return( ControllerMiddleware.getCount( model ));
+        }
+    },
 ];
 
 export default Controllers;

@@ -19,6 +19,20 @@ const ControllerMiddleware = {
 
         return middleware;
     },
+    getCount: (model: Model<any>) => {
+        const middleware = async(req: Request, res: Response, donne: any) => {
+            try {
+                const data = await ServiceFactory.create({ type: "GET_COUNT", body: "" }, model);
+                res.status( 200 ).json( data );
+                donne();
+            }
+            catch( error: any ){
+                res.status( 500 ).json({ message: error.message });
+            }
+        }
+
+        return middleware;
+    },
     deleteOneById: (model: Model<any>) => {
         const middleware = async(req: Request, res: Response, donne: any) => {
             try {

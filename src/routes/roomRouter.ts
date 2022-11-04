@@ -29,21 +29,10 @@ RoomRoutes.get('/getAll', async (req: Request, res: Response) => {
 });
 
 // Get count of document in Room collection in the database.
-RoomRoutes.get('/getCount', async (req: Request, res: Response) => {
-    console.log("[ ROOM ][ getCount ]");
-    try {
-        RoomController.getCount(req, res);
-    } catch (error) {
-        res.send( error );
-    }
-});
+RoomRoutes.get('/getCount', ControllerFactory.create("GET_COUNT", RoomModel));
 
 // Get by ID Method
-RoomRoutes.get(
-    '/getOneById/:id',
-
-    ControllerFactory.create("GET_BY_ID", RoomModel)
-);
+RoomRoutes.get('/getOneById/:id', ControllerFactory.create("GET_BY_ID", RoomModel));
 
 // Update by ID Method
 RoomRoutes.patch('/updateOneById/:id', ControllerFactory.create("UPDATE_BY_ID", RoomModel));
