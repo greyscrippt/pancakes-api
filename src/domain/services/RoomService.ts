@@ -1,4 +1,4 @@
-import { ServiceFactory } from "../../generators/FactoryAPI";
+import ServiceFactory from "../../generators/Factories/ServiceFactory";
 import RoomModel from "../../data/models/RoomModel";
 
 const deleteOneById = ( id: string ) => {
