@@ -1,5 +1,5 @@
 import { assert } from "chai";
-import { Pipe, Pipeline } from "./FactoryAPI";
+import { Pipe, Pipeline } from "./PipelineClass";
 
 describe("Testing the Pipeline class", () => {
 
