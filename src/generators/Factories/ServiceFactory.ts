@@ -8,7 +8,7 @@ import { Model } from "mongoose";
          if( Actions.find((item: ActionType) => item.type == endpoint.type) ) {
              return Actions.find((item: ActionType) => item.type == endpoint.type).action(model, endpoint.body);
          }
-         return("{}");
+         return("{'error': 'Error'}");
      }
  }
  

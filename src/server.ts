@@ -1,4 +1,4 @@
-import express, { json } from 'express';
+import express, { Router, json } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
@@ -19,7 +19,7 @@ addToLogs('Connecting to MongoDB with URL and creating database client instance.
 mongoose.connect(MONGO_URL);
 const database = mongoose.connection;
 
-const masterRouter = express.Router();
+const masterRouter = Router();
 
 
 database.on('error', (error) => {

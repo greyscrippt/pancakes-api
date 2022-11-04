@@ -1,18 +1,9 @@
-import express from "express";
+import { Request, Response, NextFunction } from "express";
+import ControllerFactory from "../../generators/Factories/ControllerFactory";
 import RoomModel from "../../data/models/RoomModel";
 import * as RoomService from "../services/RoomService";
 
-async function getOne( req: express.Request, res: express.Response ) {
-    try{
-        const data = await RoomService.getOne( req.params.id );
-        res.status( 200 ).json( data );
-    }
-    catch( error: any ){
-        res.status( 500 ).json({ message: error.message });
-    }
-}
-
-async function getCount(req: express.Request, res: express.Response) {
+async function getCount(req: Request, res: Response) {
     try{
         const data = await RoomService.getCount();
 
@@ -23,7 +14,7 @@ async function getCount(req: express.Request, res: express.Response) {
     }
 }
 
-async function getAll(req: express.Request, res: express.Response) {
+async function getAll(req: Request, res: Response) {
     try{
         const data = await RoomService.getAll();
 
@@ -34,7 +25,7 @@ async function getAll(req: express.Request, res: express.Response) {
     }
 }
 
-async function postOne(req: express.Request, res: express.Response) {
+async function postOne(req: Request, res: Response) {
     try {
         const data = new RoomModel( req.body );
         const saved = await data.save();
@@ -46,7 +37,7 @@ async function postOne(req: express.Request, res: express.Response) {
 }
 
 // TODO: Migrate this to RoomService.
-async function updateOneById(req: express.Request, res: express.Response, next: express.NextFunction) {
+async function updateOneById(req: Request, res: Response, next: NextFunction) {
     try {
         const id = req.params.id;
         const updatedData = req.body;
@@ -71,7 +62,7 @@ async function updateOneById(req: express.Request, res: express.Response, next: 
     }
 }
 
-async function deleteOneById(req: express.Request, res: express.Response) {
+async function deleteOneById(req: Request, res: Response) {
     try{
         const result = await RoomService.deleteOneById(req.params.id);
 
@@ -84,7 +75,6 @@ async function deleteOneById(req: express.Request, res: express.Response) {
 
 const RoomController = {
     deleteOneById,
-    getOne,
     getAll,
     getCount,
     postOne,
