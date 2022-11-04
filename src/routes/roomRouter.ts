@@ -46,14 +46,7 @@ RoomRoutes.get(
 );
 
 // Update by ID Method
-RoomRoutes.patch('/updateOneById/:id', async (req: Request, res: Response, next) => {
-    console.log("[ ROOM ][ updateOneById ]: "+req.params.id);
-    try {
-        RoomController.updateOneById(req, res, next);
-    } catch ( error ) {
-        res.send( error );
-    }
-});
+RoomRoutes.patch('/updateOneById/:id', ControllerFactory.create("UPDATE_BY_ID", RoomModel));
 
 // Delete one by ID Method
 RoomRoutes.delete('/deleteOneById/:id', ControllerFactory.create("DELETE_BY_ID", RoomModel));
