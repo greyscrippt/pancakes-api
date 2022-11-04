@@ -19,7 +19,7 @@ const getOne = ( id: string ) => {
 
 const getAll = () => {
     try {
-        return RoomModel.find();
+        return ServiceFactory.create({ type: "GET_ALL", body: "" }, RoomModel);;
     } catch ( error ) {
         return( error );
     }
