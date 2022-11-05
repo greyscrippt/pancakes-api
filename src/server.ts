@@ -1,6 +1,6 @@
 import express, { Router, json } from 'express';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+import { config } from 'dotenv';
 
 import cors from 'cors';
 
@@ -8,7 +8,7 @@ import addToLogs from './logging/logger';
 import RoomRoutes from './routes/roomRouter';
 import GuestRoutes from './routes/guestRouter';
 
-dotenv.config();
+config();
 
 console.log(process.env.STARTUP_MSG);
 
@@ -21,11 +21,9 @@ const database = mongoose.connection;
 
 const masterRouter = Router();
 
-
 database.on('error', (error) => {
     addToLogs(error);
 })
-
 
 database.once('connected', () => {
     addToLogs('Database connection established! Initializing API server...');
