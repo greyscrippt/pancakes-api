@@ -9,14 +9,7 @@ import RoomModel from "../data/models/RoomModel";
 const RoomRoutes = Router();
 
 // Post Method
-RoomRoutes.post('/postOne', async(req: Request, res: Response) => {
-    console.log("[ ROOM ][ postOne ]: ");
-    try {
-        RoomController.postOne(req, res);
-    } catch (error) {
-        res.send( error );
-    }
-});
+RoomRoutes.post('/postOne', ControllerFactory.create("POST_ONE", RoomModel));
 
 // Get all Method
 RoomRoutes.get('/getAll', ControllerFactory.create("GET_ALL", RoomModel));

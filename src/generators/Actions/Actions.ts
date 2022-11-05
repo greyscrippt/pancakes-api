@@ -31,6 +31,14 @@ const Actions = [
             return(model.findByIdAndUpdate( body.id, body.updatedData, body.options ));
         },
     },
+    {
+        type: "POST_ONE",
+        action: async (model: Model<any>, body: any) => {
+            const data = new model(body);
+            const res  = await data.save();
+            return({ id: res._id });
+        },
+    },
 ];
 
 export default Actions;

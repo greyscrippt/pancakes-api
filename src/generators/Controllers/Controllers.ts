@@ -36,6 +36,12 @@ const Controllers: ActionType[] = [
             return( ControllerMiddleware.getAll( model ));
         }
     },
+    {
+        type: "POST_ONE",
+        action: ( model: Model<any> ) => {
+            return( ControllerMiddleware.postOne( model ));
+        }
+    },
 ];
 
 export default Controllers;

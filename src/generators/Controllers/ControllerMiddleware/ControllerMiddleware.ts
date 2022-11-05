@@ -33,6 +33,20 @@ const ControllerMiddleware = {
 
         return middleware;
     },
+    postOne: (model: Model<any>) => {
+        const middleware = async(req: Request, res: Response, donne: any) => {
+            try {
+                const data = await ServiceFactory.create({ type: "POST_ONE", body: req.body }, model);
+                res.status( 200 ).json( data );
+                donne();
+            }
+            catch( error: any ){
+                res.status( 500 ).json({ message: error.message });
+            }
+        }
+
+        return middleware;
+    },
     getAll: (model: Model<any>) => {
         const middleware = async(req: Request, res: Response, donne: any) => {
             try {
