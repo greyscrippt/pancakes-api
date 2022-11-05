@@ -1,8 +1,8 @@
 import { Router } from "express";
 
-import RouteType from "./CommonTypes/RouteType";
+import RouteType from "../CommonTypes/RouteType";
 
-const FactoryAPI = {
+const RouterFactory = {
     createRoute(endpoints: RouteType[]) {
         const route = Router();
 
@@ -26,4 +26,4 @@ const FactoryAPI = {
     }
 }
 
-export default FactoryAPI;
+export default RouterFactory;

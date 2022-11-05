@@ -1,11 +1,7 @@
-// TODO: organize json payload in CRUD
-
-import { Router } from "express";
-
 import ControllerFactory from "../generators/Factories/ControllerFactory";
 import RoomModel from "../data/models/RoomModel";
 import RouteType from "../generators/CommonTypes/RouteType";
-import FactoryAPI from "../generators/FactoryAPI";
+import RouterFactory from "../generators/Factories/RouterFactory";
 
 const config: RouteType[] = [
     {
@@ -40,6 +36,6 @@ const config: RouteType[] = [
     },
 ];
 
-const RoomRoutes = FactoryAPI.createRoute(config);
+const RoomRoutes = RouterFactory.createRoute(config);
 
 export default RoomRoutes;
