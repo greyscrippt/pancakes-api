@@ -7,6 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.ts --ignore tests/ --watch",
+    "test": "mocha -r ts-node/register tests/**/*.test.ts",
     "build": "webpack"
   },
   "dependencies": {
