@@ -6,7 +6,7 @@
   "author": "Mongark <mongarkprogrammer@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.ts --ignore tests/",
+    "dev": "nodemon src/server.ts --ignore tests/ --watch",
     "build": "webpack"
   },
   "dependencies": {
