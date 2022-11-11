@@ -9,8 +9,6 @@ describe("Testing endpoint '/users'", () => {
     const random_name = "john".concat(rand);
 
     it("should return 'Ok' on POST /register", (done) => {
-        
-        console.log(random_name);
         server
             .post("/api/users/register")
             .send({ username: random_name, password: "123456" })

@@ -23,43 +23,54 @@ describe("Testing endpoint '/rooms'", () => {
             .expect(200, done);
     });
 
-    it("should return 'Ok' on GET /getAll", (done) => {
-        server
+    it("should return 'Ok' on GET /getAll", async () => {
+        const res = await server
             .get("/api/rooms/getAll")
-            .expect(200, done);
+            .expect(200);
+
+        assert.equal(typeof res.body, "object");
+        assert.exists(res.body[0]);
     });
 
-    it("should return 'Ok' on GET /getCount", (done) => {
-        server
+    it("should return 'Ok' on GET /getCount", async () => {
+        const res = await server
             .get("/api/rooms/getCount")
-            .expect(200, done);
+            .expect(200);
+
+        assert.equal(typeof res.body, "number");
     });
 
-    it("should return 'Ok' on GET /getOneById", async() => {
+    it("should return 'Ok' on GET /getOneById", async () => {
         const data = await server.get("/api/rooms/getAll");
         const res = await server
-            .get("/api/rooms/getOneById/"+data.body[0]._id)
+            .get("/api/rooms/getOneById/" + data.body[0]._id)
             .expect(200);
-        
+
         assert.equal(typeof res.body, "object");
         assert.exists(res.body._id);
         assert.exists(res.body.name);
     });
 
-    it("should return 'Ok' on PATCH /updateOneById", async() => {
+    it("should return 'Ok' on PATCH /updateOneById", async () => {
         const data = await server.get("/api/rooms/getAll");
 
-        await server
-            .patch("/api/rooms/updateOneById/"+data.body[0]._id)
-            .send({name: "New name"})
+        const res = await server
+            .patch("/api/rooms/updateOneById/" + data.body[0]._id)
+            .send({ name: "New name" })
             .expect(200);
+
+        assert.equal(typeof res.body, "object");
+        assert.exists(res.body._id);
     });
 
-    it("should return 'Ok' on DELETE /deleteOneById", async() => {
+    it("should return 'Ok' on DELETE /deleteOneById", async () => {
         const data = await server.get("/api/rooms/getAll");
 
-        await server
-            .delete("/api/rooms/deleteOneById/"+data.body[0]._id)
+        const res = await server
+            .delete("/api/rooms/deleteOneById/" + data.body[0]._id)
             .expect(200);
+
+        assert.equal(typeof res.body, "object");
+        assert.exists(res.body._id);
     });
 });
