@@ -42,6 +42,8 @@ describe("Testing endpoint '/rooms'", () => {
             .expect(200);
         
         assert.equal(typeof res.body, "object");
+        assert.exists(res.body._id);
+        assert.exists(res.body.name);
     });
 
     it("should return 'Ok' on PATCH /updateOneById", async() => {
