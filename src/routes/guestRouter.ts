@@ -36,6 +36,6 @@ const config: RouteType[] = [
     },
 ];
 
-const GuestRouter = RouterFactory.createRoute(config);
+const GuestRoutes = RouterFactory.createRoute(config);
 
-export default GuestRouter;
+export default GuestRoutes;
