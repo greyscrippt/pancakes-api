@@ -1,5 +1,17 @@
+import { assert } from "chai";
 import supertest from "supertest";
-import app from "../../src/server";
+
+import app from "../../src/app";
+
+interface TestConfig {
+    msg: string,
+    routes: [
+        {
+            uri: string,
+            callback: any
+        },
+    ],
+}
 
 describe("Testing endpoint '/rooms'", () => {
     const server = supertest(app);
@@ -23,9 +35,29 @@ describe("Testing endpoint '/rooms'", () => {
             .expect(200, done);
     });
 
-    it("should return 'Ok' on GET /getOneById", (done) => {
-        server
-            .get("/api/rooms/getOneById")
-            .expect(200, done);
+    it("should return 'Ok' on GET /getOneById", async() => {
+        const data = await server.get("/api/rooms/getAll");
+        const res = await server
+            .get("/api/rooms/getOneById/"+data.body[0]._id)
+            .expect(200);
+        
+        assert.equal(typeof res.body, "object");
+    });
+
+    it("should return 'Ok' on PATCH /updateOneById", async() => {
+        const data = await server.get("/api/rooms/getAll");
+
+        await server
+            .patch("/api/rooms/updateOneById/"+data.body[0]._id)
+            .send({name: "New name"})
+            .expect(200);
+    });
+
+    it("should return 'Ok' on DELETE /deleteOneById", async() => {
+        const data = await server.get("/api/rooms/getAll");
+
+        await server
+            .delete("/api/rooms/deleteOneById/"+data.body[0]._id)
+            .expect(200);
     });
 });

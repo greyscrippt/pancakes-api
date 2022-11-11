@@ -6,9 +6,9 @@
   "author": "Mongark <mongarkprogrammer@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon src/server.ts --ignore tests/ --watch --watch-files src/**/*.ts",
+    "dev": "nodemon src/server.ts --ignore tests/ --watch",
     "test": "mocha -r ts-node/register testing/**/*.test.ts --watch --watch-files testing/**/*.test.ts",
-    "jest": "jest supertest/ --watch",
+    "jest": "jest supertest/ --watch --detectOpenHandles",
     "supertest": "mocha -r ts-node/register supertest/**/*.test.ts",
     "build": "webpack"
   },
