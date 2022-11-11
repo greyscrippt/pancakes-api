@@ -16,11 +16,13 @@ interface TestConfig {
 describe("Testing endpoint '/rooms'", () => {
     const server = supertest(app);
 
-    it("should return 'Ok' on POST /postOne", (done) => {
-        server
+    it("should return 'Ok' on POST /postOne", async() => {
+        const res = await server
             .post("/api/rooms/postOne")
             .send({ name: "testroom" })
-            .expect(200, done);
+            .expect(200);
+        
+        assert.exists(res.body.id);
     });
 
     it("should return 'Ok' on GET /getAll", async () => {
