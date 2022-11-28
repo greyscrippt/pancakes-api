@@ -1,15 +1,12 @@
-# 🚀 Welcome to your new awesome project!
+# NanoERP API
 
-This project has been created using **webpack-cli**, you can now run
+Small API that communicates with a MongoDB database. Used in the NanoERP project.
 
-```
-npm run build
-```
+## Project Structure
 
-or
-
-```
-yarn build
-```
-
-to bundle your application
+### Folders
+ `data` Where the API communicates with the MongoDB database using Mongoose.
+    `models` Mongoose models
+    `schema` Mongoose schema
+ `generators` API route generators
+    `Actions` Where Actions are separated by type.
