@@ -3,14 +3,30 @@
 Small API that communicates with a MongoDB database. Used in the NanoERP project.
 
 ## Project Structure
+```
+src
+├── data
+│   ├── models
+│   └── schema
+├── generators
+│   ├── Actions
+│   ├── CommonTypes
+│   ├── Controllers
+│   │   ├── ControllerMiddleware
+│   ├── Factories
+├── middleware
+│   └── auth
+└── routes
+```
 
-### Folders
- `data` Where the API communicates with the MongoDB database using Mongoose.
+### Data
+For Models and Schema.
 
-    `models` Mongoose models
+### Generators
+For API route generation.
 
-    `schema` Mongoose schema
+### Middleware
+For non-generator middleware, such as Auth.
 
- `generators` API route generators
-
-    `Actions` Where Actions are separated by type.
+### Routes
+For defining and loading generated routes.
