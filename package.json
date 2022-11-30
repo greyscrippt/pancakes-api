@@ -9,7 +9,7 @@
     "dev": "nodemon src/server.ts --ignore tests/ --watch",
     "test": "mocha -r ts-node/register testing/**/*.test.ts --watch --watch-files testing/**/*.test.ts",
     "jest": "jest supertest/ --watch --detectOpenHandles",
-    "supertest": "mocha -r ts-node/register supertest/**/*.test.ts",
+    "supertest": "mocha -r ts-node/register supertest/**/*.test.ts --watch --watch-files supertest/**/*.test.ts",
     "build": "webpack"
   },
   "dependencies": {

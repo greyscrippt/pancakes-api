@@ -3,4 +3,7 @@
     <note priority="high" time="1666301398">
         ISSUE: tests won't work at first run on an empty database
     </note>
+    <note priority="high" time="1669663523">
+        API is called whenever the page re-renders in RoomsPage
+    </note>
 </todo>
