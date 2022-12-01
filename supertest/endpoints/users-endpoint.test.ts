@@ -19,6 +19,9 @@ describe("Testing endpoint '/users'", () => {
         server
             .post("/api/users/login")
             .send({ username: random_name, password: "123456" })
-            .expect(200, done);
+            .end((err, res) => {
+                if(err) {console.log(err);return;}
+                console.log(res.body);
+            });
     });
 });

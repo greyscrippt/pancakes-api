@@ -2,6 +2,8 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 
 import UserModel from "../../data/models/UserModel";
 
+import TokenManager from "./token-manager";
+
 async function login(req: Request, res: Response, next: NextFunction) {
     const { username, password } = req.body;
 
@@ -13,9 +15,11 @@ async function login(req: Request, res: Response, next: NextFunction) {
                 error: "User not found",
             })
         } else {
+            const token = TokenManager.signToken(user);
             res.status(200).json({
                 message: "Login successful",
-                user,
+                user: user,
+                token: token,
             })
         }
     } catch (error: any) {
