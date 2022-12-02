@@ -34,7 +34,6 @@ describe("Testing endpoint '/users'", () => {
                     console.log(err);
                     return;
                 }
-                console.log(res.body);
             });
         done();
     });

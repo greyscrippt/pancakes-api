@@ -11,9 +11,11 @@ async function login(req: Request, res: Response, next: NextFunction) {
     const user          = { username: user_detail.username, password: user_detail.password };
 
     try {
-        res.status(200).send(user);
+        if(!user) {
+            res.status(404).json("User not found");
+        }
     } catch (error: any) {
-        res.status(400).send(error.message);
+        res.status(400).json(error.message);
         next();
     }
 }
