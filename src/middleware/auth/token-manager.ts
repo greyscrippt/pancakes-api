@@ -24,7 +24,7 @@ const signToken = (data: any) => {
     return generateToken(data, { expiresIn: '1h' });
 }
 
-const verify = (req: Request, res: Response, next: NextFunction) => {
+const verifyToken = (req: Request, res: Response, next: NextFunction) => {
     const authHeader = req.body;
 
     if( authHeader == null ) return res.status(401).send("Request body is empty!\n");
@@ -46,7 +46,7 @@ const verify = (req: Request, res: Response, next: NextFunction) => {
 
 const TokenManager = {
     signToken,
-    verify,
+    verifyToken,
 };
 
 export default TokenManager;

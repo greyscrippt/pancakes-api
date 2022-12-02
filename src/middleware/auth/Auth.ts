@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 
 import UserModel from "../../data/models/UserModel";
 
-// import TokenManager from "./token-manager";
+import TokenManager from "./token-manager";
 
 async function login(req: Request, res: Response, next: NextFunction) {
     const user_data     = req.body;
@@ -14,10 +14,25 @@ async function login(req: Request, res: Response, next: NextFunction) {
         if(!user) {
             res.status(404).json("User not found");
         }
+        const token = TokenManager.signToken(user);
+
+        res.status(200).json(token);
     } catch (error: any) {
         res.status(400).json(error.message);
         next();
     }
+}
+
+async function verifyToken(req: Request, res: Response, next: NextFunction) {
+    try {
+        const token = req.body;
+
+        if(!token) {
+            res.status(400).send("No token provided!");
+        }
+        const verified: any = TokenManager.verifyToken( token );
+
+    } catch(error) {}
 }
 
 async function register(req: Request, res: Response, next: NextFunction) {
