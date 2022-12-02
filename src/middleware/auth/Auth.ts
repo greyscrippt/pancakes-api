@@ -29,6 +29,5 @@ async function register(req: Request, res: Response, next: NextFunction) {
 }
 
 export {
-    login,
     register,
 };
