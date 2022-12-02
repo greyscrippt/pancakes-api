@@ -8,7 +8,6 @@
   "scripts": {
     "dev": "nodemon src/server.ts --ignore tests/ --watch",
     "test": "mocha -r ts-node/register testing/**/*.test.ts --watch --watch-files testing/**/*.test.ts",
-    "jest": "jest supertest/ --watch --detectOpenHandles",
     "supertest": "ts-mocha supertest/**/*.test.ts --watch --watch-files supertest/**/*.test.ts"
   },
   "dependencies": {
