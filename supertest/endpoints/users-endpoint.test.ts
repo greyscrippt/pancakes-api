@@ -7,21 +7,35 @@ describe("Testing endpoint '/users'", () => {
 
     const rand = Math.floor(Math.random()*100000).toString();
     const random_name = "john".concat(rand);
+    const payload = {
+        username: random_name,
+        password: 123456,
+    };
 
     it("should return 'Ok' on POST /register", (done) => {
         server
             .post("/api/users/register")
-            .send({ username: random_name, password: "123456" })
-            .expect(200, done);
+            .send(payload)
+            .end((err, res) => {
+                if(err) {
+                    console.log(err);
+                    return;
+                }
+            });
+        done();
     });
 
     it("should return 'Ok' on POST /login", (done) => {
         server
             .post("/api/users/login")
-            .send({ username: random_name, password: "123456" })
+            .send(payload)
             .end((err, res) => {
-                if(err) {console.log(err);return;}
+                if(err) {
+                    console.log(err);
+                    return;
+                }
                 console.log(res.body);
             });
+        done();
     });
 });

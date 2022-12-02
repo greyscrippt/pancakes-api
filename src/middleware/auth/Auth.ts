@@ -1,32 +1,20 @@
-import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 import UserModel from "../../data/models/UserModel";
 
-import TokenManager from "./token-manager";
+// import TokenManager from "./token-manager";
 
 async function login(req: Request, res: Response, next: NextFunction) {
-    const { username, password } = req.body;
+    const user_data     = req.body;
+    const user_detail   = await UserModel.findOne(user_data);
+
+    const user          = { username: user_detail.username, password: user_detail.password };
 
     try {
-        const user = await UserModel.findOne({ username, password })
-        if (!user) {
-            res.status(401).json({
-                message: "Login not successful",
-                error: "User not found",
-            })
-        } else {
-            const token = TokenManager.signToken(user);
-            res.status(200).json({
-                message: "Login successful",
-                user: user,
-                token: token,
-            })
-        }
+        res.status(200).send(user);
     } catch (error: any) {
-        res.status(400).json({
-            message: "An error occurred",
-            error: error.message,
-        })
+        res.status(400).send(error.message);
+        next();
     }
 }
 
