@@ -4,37 +4,6 @@ import UserModel from "../../data/models/UserModel";
 
 import TokenManager from "./token-manager";
 
-async function login(req: Request, res: Response, next: NextFunction) {
-    const user_data     = req.body;
-    const user_detail   = await UserModel.findOne(user_data);
-
-    const user          = { username: user_detail.username, password: user_detail.password };
-
-    try {
-        if(!user) {
-            res.status(404).json("User not found");
-        }
-        const token = TokenManager.signToken(user);
-
-        res.status(200).json(token);
-    } catch (error: any) {
-        res.status(400).json(error.message);
-        next();
-    }
-}
-
-async function verifyToken(req: Request, res: Response, next: NextFunction) {
-    try {
-        const token = req.body;
-
-        if(!token) {
-            res.status(400).send("No token provided!");
-        }
-        const verified: any = TokenManager.verifyToken( token );
-
-    } catch(error) {}
-}
-
 async function register(req: Request, res: Response, next: NextFunction) {
     const { username, password } = req.body
     if (password.length < 6) {

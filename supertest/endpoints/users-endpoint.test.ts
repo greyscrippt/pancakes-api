@@ -7,6 +7,9 @@ describe("Testing endpoint '/users'", () => {
 
     const rand = Math.floor(Math.random()*100000).toString();
     const random_name = "john".concat(rand);
+
+    var token;
+
     const payload = {
         username: random_name,
         password: 123456,
@@ -28,6 +31,20 @@ describe("Testing endpoint '/users'", () => {
     it("should return 'Ok' on POST /login", (done) => {
         server
             .post("/api/users/login")
+            .send(payload)
+            .end((err, res) => {
+                if(err) {
+                    console.log(err);
+                    return;
+                }
+                // token = res.body;
+            });
+        done();
+    });
+
+    it("should return 'Ok' on POST /verifyToken", (done) => {
+        server
+            .post("/api/users/verifyToken")
             .send(payload)
             .end((err, res) => {
                 if(err) {
