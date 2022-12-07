@@ -64,6 +64,7 @@ const verifyToken = (req: Request, res: Response, next: NextFunction) => {
 }
 
 const TokenManager = {
+    generateToken,
     signToken,
     verifyToken,
 };
