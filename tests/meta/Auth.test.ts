@@ -4,9 +4,9 @@ import app from "../../src/app";
 describe("Authentication tests", () => {
     const server = supertest(app);
 
-    it("should return 'Ok'", (done) => {
+    it("should return a 400 error upon invalid request", (done) => {
         server
-            .get("/api/signToken")
-            .expect(200, done);
+            .post("/api/users/signToken")
+            .expect(400, done);
     });
 });

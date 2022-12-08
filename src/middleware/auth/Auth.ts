@@ -17,8 +17,6 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
         res.status(400).send("User data is incomplete");
         next();
     }
-
-
 }
 
 async function register(req: Request, res: Response, next: NextFunction) {
