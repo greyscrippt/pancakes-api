@@ -7,8 +7,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/server.ts --ignore tests/ --watch",
-    "test": "mocha -r ts-node/register testing/**/*.test.ts --watch --watch-files testing/**/*.test.ts",
-    "supertest": "ts-mocha supertest/**/*.test.ts --watch --watch-files supertest/**/*.test.ts"
+    "test": "ts-mocha tests/**/*.test.ts --watch --watch-files tests/**/*.test.ts"
   },
   "dependencies": {
     "dotenv": "^16.0.3",

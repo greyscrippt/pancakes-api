@@ -1,5 +1,5 @@
 import supertest from "supertest";
-import app from "../src/app";
+import app from "../../src/app";
 
 describe("GET in endpoint /ping", () => {
     const server = supertest(app);
