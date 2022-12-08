@@ -6,7 +6,7 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
     const user_data = req.body;
 
     if(!user_data) {
-        res.status(401).send("User data is not provided");
+        res.status(400).send("User data is not provided");
         next();
     }
 
