@@ -1,9 +1,12 @@
 import supertest from "supertest";
 import app from "../src/app";
 
-describe("Testing Auth endpoint", () => {
+describe("Authentication tests", () => {
     const server = supertest(app);
 
-    it("should generate token from 'generateToken' function", () => {
+    it("should return 'Ok'", (done) => {
+        server
+            .get("/api/signToken")
+            .expect(200, done);
     });
 });
