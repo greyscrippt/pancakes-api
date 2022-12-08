@@ -7,6 +7,7 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
 
     if(!user_data) {
         res.status(401).send("User data is not provided");
+        next();
     }
 
     // Add decrypt function below
@@ -14,7 +15,10 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
 
     if(!user.username || !user.password) {
         res.status(400).send("User data is incomplete");
+        next();
     }
+
+
 }
 
 async function register(req: Request, res: Response, next: NextFunction) {
