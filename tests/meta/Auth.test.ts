@@ -1,4 +1,4 @@
-import {assert} from "chai";
+import { assert } from "chai";
 import supertest from "supertest";
 import app from "../../src/app";
 import TokenManager from "../../src/middleware/auth/TokenManager";
