@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import bcrypt from "bcrypt";
 
+import TokenManager from "./TokenManager";
 import UserModel from "../../data/models/UserModel";
 
 async function signToken(req: Request, res: Response, next: NextFunction) {
