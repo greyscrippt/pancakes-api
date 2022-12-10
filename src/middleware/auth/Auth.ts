@@ -20,7 +20,7 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
     const user = await UserModel.findOne({username: user_data.username});
 
     if(!user) {
-        res.status(401).send("User not found");
+        res.status(402).send("User not found");
         next();
     }
 
@@ -28,7 +28,7 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
         .compare(user.password, user_data.password);
 
     if(!result) {
-        res.status(402).send("Password invalid");;
+        res.status(403).send("Password invalid");;
         next();
     }
 
