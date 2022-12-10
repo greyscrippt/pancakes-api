@@ -7,11 +7,6 @@ import UserModel from "../../data/models/UserModel";
 async function signToken(req: Request, res: Response, next: NextFunction) {
     const user_data = req.body;
 
-    if(!user_data) {
-        res.status(400).send("User data is not provided");
-        next();
-    }
-
     if(!user_data.username || !user_data.password) {
         res.status(401).send("User data is incomplete");
         next();

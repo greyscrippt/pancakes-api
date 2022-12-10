@@ -22,7 +22,7 @@ describe("Authentication endpoint tests", () => {
         server
             .post("/api/users/signToken")
             .end((err: any, res: supertest.Response) => {
-                assert.equal(res.status, 400)
+                assert.equal(res.status, 401)
                 console.log(res.body);
                 done(err);
             });
