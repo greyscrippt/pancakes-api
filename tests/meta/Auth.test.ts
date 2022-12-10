@@ -18,12 +18,21 @@ describe("Tests for authentication functions", () => {
 describe("Authentication endpoint tests", () => {
     const server = supertest(app);
 
-    it("should return a 400 error upon invalid request", (done) => {
+    it("should return a 401 error upon sending an empty body request", (done) => {
         server
             .post("/api/users/signToken")
             .end((err: any, res: supertest.Response) => {
-                assert.equal(res.status, 401)
-                console.log(res.body);
+                assert.equal(res.status, 401);
+                done(err);
+            });
+    });
+
+    it("should return a 402 error upon sending invalid body", (done) => {
+        server
+            .post("/api/users/signToken")
+            .send({username: "Joe", password:"1234567"})
+            .end((err: any, res: supertest.Response) => {
+                assert.equal(res.status, 402);
                 done(err);
             });
     });
