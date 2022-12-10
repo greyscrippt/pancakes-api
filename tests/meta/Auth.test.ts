@@ -21,6 +21,10 @@ describe("Authentication endpoint tests", () => {
     it("should return a 400 error upon invalid request", (done) => {
         server
             .post("/api/users/signToken")
-            .expect(400, done);
+            .end((err: any, res: supertest.Response) => {
+                assert.equal(res.status, 400)
+                console.log(res.body);
+                done(err);
+            });
     });
 });
