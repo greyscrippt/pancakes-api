@@ -13,14 +13,14 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
     }
 
     if(!user_data.username || !user_data.password) {
-        res.status(400).send("User data is incomplete");
+        res.status(401).send("User data is incomplete");
         next();
     }
 
     const user = await UserModel.findOne({username: user_data.username});
 
     if(!user) {
-        res.status(400).send("User not found");
+        res.status(401).send("User not found");
         next();
     }
 
@@ -28,7 +28,7 @@ async function signToken(req: Request, res: Response, next: NextFunction) {
         .compare(user.password, user_data.password);
 
     if(!result) {
-        res.status(400).send("Password invalid");;
+        res.status(402).send("Password invalid");;
         next();
     }
 
