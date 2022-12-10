@@ -1,7 +1,4 @@
-// TODO: organize json payload in CRUD
-
 import { Router } from "express";
-// import TokenManager from "../middleware/auth/token-manager";
 
 import * as Auth from "../middleware/auth/Auth";
 
