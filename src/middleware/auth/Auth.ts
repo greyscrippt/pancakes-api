@@ -1,36 +1,19 @@
 import { NextFunction, Request, Response } from "express";
-import bcrypt from "bcrypt";
+// import bcrypt from "bcrypt";
 
 import TokenManager from "./TokenManager";
 import UserModel from "../../data/models/UserModel";
 
-async function signToken(req: Request, res: Response, next: NextFunction) {
+function signToken(req: Request, res: Response) {
     const user_data = req.body;
 
-    if(!user_data.username || !user_data.password) {
-        res.status(401).send("User data is incomplete");
-        next();
-    }
+    if(!user_data.username || !user_data.password) res.status(400).send("User data is incomplete");
 
-    const user = await UserModel.findOne({username: user_data.username});
-
-    if(!user) {
-        res.status(402).send("User not found");
-        next();
-    }
-
-    const result = await bcrypt
-        .compare(user.password, user_data.password);
-
-    if(!result) {
-        res.status(403).send("Password invalid");;
-        next();
-    }
-
-    const jwt_token = TokenManager.generateToken(user.username);
-
-    res.status(200).json(jwt_token);
-
+    UserModel.findOne({username: user_data.username}).then((user) => {
+        res.status(200).send(user_data);
+    }).catch((err) => {
+        res.status(404).send("User not found");
+    });
 }
 
 async function register(req: Request, res: Response, next: NextFunction) {
