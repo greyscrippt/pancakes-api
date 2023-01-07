@@ -23,9 +23,9 @@ const SampleSchema = new Schema({
 const SampleModel = model('Sample', SampleSchema);
 ```
 
-### Route Generation
+### Router Generation
 
-With a Model, you can generate an Express router based on an array of endpoints.
+With a Model, you can generate an Express router based on an array of endpoints. Each endpoint must be defined according to the EndpointType interface.
 
 ```typescript
 const router_config: Array<EndpointType> = [
