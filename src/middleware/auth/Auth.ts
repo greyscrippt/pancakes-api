@@ -1,8 +1,12 @@
 import { NextFunction, Request, Response } from "express";
-// import bcrypt from "bcrypt";
 
-import TokenManager from "./TokenManager";
 import UserModel from "../../data/models/UserModel";
+
+function validateToken(req: Request, res: Response, next: NextFunction) {
+    res.status(200).send("Hello, world");
+
+    next();
+}
 
 function signToken(req: Request, res: Response) {
     const user_data = req.body;
@@ -43,4 +47,5 @@ async function register(req: Request, res: Response, next: NextFunction) {
 export {
     register,
     signToken,
+    validateToken,
 };

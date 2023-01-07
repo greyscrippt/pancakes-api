@@ -6,7 +6,7 @@ function generateToken(data: any) {
     return jwt.sign(data, process.env.TOKEN_SECRET);
 }
 
-function validateToken(data: any) {
+function validateToken(data: string) {
     if(!data) return;
 
     return jwt.verify(data, process.env.TOKEN_SECRET);

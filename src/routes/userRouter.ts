@@ -6,5 +6,6 @@ const UserRoutes = Router();
 
 UserRoutes.post("/register", Auth.register);
 UserRoutes.post("/signToken", Auth.signToken);
+UserRoutes.post("/validateToken/:token", Auth.validateToken);
 
 export default UserRoutes;

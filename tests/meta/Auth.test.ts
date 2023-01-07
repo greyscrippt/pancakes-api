@@ -9,8 +9,8 @@ describe("Tests for authentication functions", () => {
     const token_data = { test: "123" };
 
     it("testing token generation and validation", () => {
-        const token: any = TokenManager.generateToken(token_data);
-        const verified: any = TokenManager.validateToken(token);
+        const token = TokenManager.generateToken(token_data);
+        const verified = TokenManager.validateToken(token);
 
         assert.isOk(verified);
         assert.equal(verified.test, token_data.test);
@@ -20,6 +20,8 @@ describe("Tests for authentication functions", () => {
 describe("Authentication endpoint tests", () => {
     const server = supertest(app);
     const mock_user = {username: "John Constantine"+(Math.random()*1000).toString(), password: "12345678"};
+    const encrypted = {username: mock_user.username, password: bcrypt.hashSync(mock_user.password, 10)};
+    const token = TokenManager.generateToken(encrypted).toString();
 
     it("should return a 400 error upon sending invalid body", (done) => {
         server
@@ -39,7 +41,7 @@ describe("Authentication endpoint tests", () => {
     it("should return status 200 upon sending a valid register for an account", (done) => {
         server
             .post("/api/users/register")
-            .send(mock_user)
+            .send(encrypted)
             .end((err, res) => {
                 assert.equal(res.body["message"], "User successfully created")
             });
@@ -57,11 +59,7 @@ describe("Authentication endpoint tests", () => {
         done();
     });
 
-    it("should return status 200 upon signing an account", (done) => {
-        const encrypted = {
-                username: mock_user.username,
-                password: bcrypt.hashSync(mock_user.password, 10),
-        };
+    it("should return status 200 upon signing a valid account", (done) => {
         server
             .post("/api/users/signToken")
             .send(encrypted)
@@ -69,6 +67,16 @@ describe("Authentication endpoint tests", () => {
                 assert.equal(res.status, 200);
                 assert.equal(JSON.stringify(res.body), JSON.stringify(encrypted));
             });
+        done();
+    });
+
+    it("should return status 200 upon validating an account", (done) => {
+        const result = server
+            .post("/api/users/validateToken/"+token)
+            .send();
+
+        console.log(result.body);
+
         done();
     });
 });
