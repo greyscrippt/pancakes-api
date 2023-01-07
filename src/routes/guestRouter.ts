@@ -1,9 +1,9 @@
-import RouteType from "../generators/CommonTypes/RouteType";
+import RouterConfig from "../generators/CommonTypes/RouterConfig";
 import ControllerFactory from "../generators/Factories/ControllerFactory";
 import GuestModel from "../data/models/GuestModel";
 import RouterFactory from "../generators/Factories/RouterFactory";
 
-const config: RouteType[] = [
+const config: RouterConfig[] = [
     {
         type:       "GET",
         uri:        "/getOneById/:id",

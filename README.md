@@ -30,7 +30,7 @@ You can find more information about it [here](https://mongoosejs.com/docs/models
 With a Model, you can generate an Express router based on an array of endpoints. Each endpoint must be defined according to the EndpointType interface, and endpoint queries can ben passed through the `uri` string.
 
 ```typescript
-const router_config: Array<EndpointType> = [
+const router_config: Array<RouterConfig> = [
     {
         type:       "GET",
         uri:        "/:id",

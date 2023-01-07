@@ -1,14 +1,14 @@
 import ControllerFactory from "../generators/Factories/ControllerFactory";
 import RoomModel from "../data/models/RoomModel";
-import EndpointType from "../generators/CommonTypes/RouteType";
+import RouterConfig from "../generators/CommonTypes/RouterConfig";
 import RouterFactory from "../generators/Factories/RouterFactory";
 
-const config: EndpointType[] = [
+const config: RouterConfig[] = [
     {
         type:       "GET",
         uri:        "/getOneById/:id",
         middleware: ControllerFactory.create("GET_BY_ID", RoomModel),
-    },
+   },
     {
         type:       "GET",
         uri:        "/getAll",

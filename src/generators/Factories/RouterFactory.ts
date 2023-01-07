@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import RouteType from "../CommonTypes/RouteType";
+import RouteType from "../CommonTypes/RouterConfig";
 
 const RouterFactory = {
     createRoute(endpoints: RouteType[]) {
