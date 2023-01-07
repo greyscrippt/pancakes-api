@@ -1,9 +1,9 @@
 import ControllerFactory from "../generators/Factories/ControllerFactory";
 import RoomModel from "../data/models/RoomModel";
-import RouteType from "../generators/CommonTypes/RouteType";
+import EndpointType from "../generators/CommonTypes/RouteType";
 import RouterFactory from "../generators/Factories/RouterFactory";
 
-const config: RouteType[] = [
+const config: EndpointType[] = [
     {
         type:       "GET",
         uri:        "/getOneById/:id",
