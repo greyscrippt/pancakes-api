@@ -6,6 +6,10 @@
 
 Small API that communicates with a MongoDB database. Used in the NanoERP project.
 
+## Todo
+
+- [ ] TestFactory to auto-generate tests.
+
 ## Project Structure
 ```
 src
