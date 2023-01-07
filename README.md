@@ -10,6 +10,8 @@ Small API that communicates with a MongoDB database. Used in the NanoERP project
 
 - [ ] TestFactory to auto-generate tests.
 
+- [ ] Rename RouteType folder to EndpointType
+
 ## Project Structure
 ```
 src
