@@ -6,7 +6,7 @@
 
 Small API that communicates with a MongoDB database. Used in the NanoERP project.
 
-## How to Use
+## How to Use the Router Generator
 
 ### Schema and Model
 
