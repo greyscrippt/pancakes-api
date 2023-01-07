@@ -23,6 +23,8 @@ const SampleSchema = new Schema({
 const SampleModel = model('Sample', SampleSchema);
 ```
 
+You can find more information about it [Here](https://mongoosejs.com/docs/models.html).
+
 ### Router Generation
 
 With a Model, you can generate an Express router based on an array of endpoints. Each endpoint must be defined according to the EndpointType interface, and endpoint queries can ben passed through the `uri` string.
