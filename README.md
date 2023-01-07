@@ -25,18 +25,18 @@ const SampleModel = model('Sample', SampleSchema);
 
 ### Router Generation
 
-With a Model, you can generate an Express router based on an array of endpoints. Each endpoint must be defined according to the EndpointType interface.
+With a Model, you can generate an Express router based on an array of endpoints. Each endpoint must be defined according to the EndpointType interface, and endpoint queries can ben passed through the `uri` string.
 
 ```typescript
 const router_config: Array<EndpointType> = [
     {
         type:       "GET",
-        uri:        "/getOneById/:id",
+        uri:        "/:id",
         middleware: ControllerFactory.create("GET_BY_ID", SampleModel),
     },
     {
         type:       "POST",
-        uri:        "/postOne",
+        uri:        "/",
         middleware: ControllerFactory.create("POST_ONE", SampleModel),
     },
 ]
