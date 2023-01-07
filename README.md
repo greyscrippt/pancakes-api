@@ -23,7 +23,7 @@ const SampleSchema = new Schema({
 const SampleModel = model('Sample', SampleSchema);
 ```
 
-You can find more information about it [Here](https://mongoosejs.com/docs/models.html).
+You can find more information about it [here](https://mongoosejs.com/docs/models.html).
 
 ### Router Generation
 
@@ -44,6 +44,16 @@ const router_config: Array<EndpointType> = [
 ]
 
 const sample_router = RouterFactory.createRoute(config);
+```
+
+### Adding to the API
+
+Lastly, youd just have to use the created route in your Express API.
+
+```typescript
+const app = express();
+
+app.use(sample_router);
 ```
 
 ## Todo
