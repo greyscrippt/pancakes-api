@@ -6,6 +6,44 @@
 
 Small API that communicates with a MongoDB database. Used in the NanoERP project.
 
+## How to Use
+
+### Schema and Model
+
+First, you must create a Mongoose Model from a Schema that an endpoint can use. Example:
+
+```typescript
+const SampleSchema = new Schema({
+    name: {
+        required: true,
+        type: String,
+    },
+});
+
+const SampleModel = model('Sample', SampleSchema);
+```
+
+### Route Generation
+
+With a Model, you can generate an Express router based on an array of endpoints.
+
+```typescript
+const router_config: Array<EndpointType> = [
+    {
+        type:       "GET",
+        uri:        "/getOneById/:id",
+        middleware: ControllerFactory.create("GET_BY_ID", SampleModel),
+    },
+    {
+        type:       "POST",
+        uri:        "/postOne",
+        middleware: ControllerFactory.create("POST_ONE", SampleModel),
+    },
+]
+
+const sample_router = RouterFactory.createRoute(config);
+```
+
 ## Todo
 
 - [ ] TestFactory to auto-generate tests.
