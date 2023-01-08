@@ -1,14 +1,7 @@
-import {Model} from "mongoose";
+import MiddlewareConfig from "./MiddlewareConfig";
 
-interface MiddlewareConfig {
-    type: string,
-    model: Model<any, any>
-}
-
-interface RouterType {
+export default interface RouterType {
     type: string,
     uri: string,
-    middleware: any,
-}
-
-export default RouterType;
+    middleware: MiddlewareConfig,
+};

@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 import RoomRoutes from './routes/roomRouter';
-import GuestRoutes from './routes/guestRouter';
-import UserRoutes from './routes/userRouter';
+// import GuestRoutes from './routes/guestRouter';
+// import UserRoutes from './routes/userRouter';
 
 dotenv.config();
 
@@ -28,8 +28,8 @@ app.use(cors());
 
 masterRouter.get('/ping', (req, res) => res.status(200).send("pong"));
 masterRouter.use('/rooms', RoomRoutes);
-masterRouter.use('/guests', GuestRoutes);
-masterRouter.use('/users', UserRoutes);
+// masterRouter.use('/guests', GuestRoutes);
+// masterRouter.use('/users', UserRoutes);
 
 app.use('/api', masterRouter);
 

@@ -1,5 +1,4 @@
 import RouterConfig from "../generators/CommonTypes/RouterConfig";
-import ControllerFactory from "../generators/Factories/ControllerFactory";
 import GuestModel from "../data/models/GuestModel";
 import RouterFactory from "../generators/Factories/RouterFactory";
 
@@ -7,32 +6,50 @@ const config: RouterConfig[] = [
     {
         type:       "GET",
         uri:        "/getOneById/:id",
-        middleware: ControllerFactory.create("GET_BY_ID", GuestModel),
+        middleware: {
+            type: "GET_BY_ID",
+            model: GuestModel,
+        },
     },
     {
         type:       "GET",
         uri:        "/getAll",
-        middleware: ControllerFactory.create("GET_ALL", GuestModel),
+        middleware: {
+            type: "GET_ALL",
+            model: GuestModel
+        },
     },
     {
         type:       "GET",
         uri:        "/getCount",
-        middleware: ControllerFactory.create("GET_COUNT", GuestModel),
+        middleware: {
+            type: "GET_COUNT",
+            model: GuestModel,
+        },
     },
     {
         type:       "POST",
         uri:        "/postOne",
-        middleware: ControllerFactory.create("POST_ONE", GuestModel),
+        middleware: {
+            type: "POST_ONE",
+            model: GuestModel,
+        },
     },
     {
         type:       "PATCH",
         uri:        "/updateOneById/:id",
-        middleware: ControllerFactory.create("UPDATE_BY_ID", GuestModel),
+        middleware: {
+            type: "UPDATE_BY_ID",
+            model: GuestModel,
+        },
     },
     {
         type:       "DELETE",
         uri:        "/deleteOneById/:id",
-        middleware: ControllerFactory.create("DELETE_BY_ID", GuestModel),
+        middleware: {
+            type: "DELETE_BY_ID",
+            model: GuestModel,
+        },
     },
 ];
 

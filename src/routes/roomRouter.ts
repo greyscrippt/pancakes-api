@@ -7,32 +7,50 @@ const config: RouterConfig[] = [
     {
         type:       "GET",
         uri:        "/getOneById/:id",
-        middleware: ControllerFactory.create("GET_BY_ID", RoomModel),
+        middleware: {
+            type: "GET_BY_ID",
+            model: RoomModel,
+        },
    },
     {
         type:       "GET",
         uri:        "/getAll",
-        middleware: ControllerFactory.create("GET_ALL", RoomModel),
+        middleware: {
+            type: "GET_ALL",
+            model: RoomModel,
+        },
     },
     {
         type:       "GET",
         uri:        "/getCount",
-        middleware: ControllerFactory.create("GET_COUNT", RoomModel),
+        middleware: {
+            type: "GET_COUNT",
+            model: RoomModel,
+        },
     },
     {
         type:       "POST",
         uri:        "/postOne",
-        middleware: ControllerFactory.create("POST_ONE", RoomModel),
+        middleware: {
+            type: "POST_ONE",
+            model: RoomModel,
+        },
     },
     {
         type:       "PATCH",
         uri:        "/updateOneById/:id",
-        middleware: ControllerFactory.create("UPDATE_BY_ID", RoomModel),
+        middleware: {
+            type: "UPDATE_BY_ID",
+            model: RoomModel,
+        },
     },
     {
         type:       "DELETE",
         uri:        "/deleteOneById/:id",
-        middleware: ControllerFactory.create("DELETE_BY_ID", RoomModel),
+        middleware: {
+            type: "DELETE_BY_ID",
+            model: RoomModel,
+        },
     },
 ];
 
