@@ -1,4 +1,3 @@
-import ControllerFactory from "../generators/Factories/ControllerFactory";
 import RoomModel from "../data/models/RoomModel";
 import RouterConfig from "../generators/CommonTypes/RouterConfig";
 import RouterFactory from "../generators/Factories/RouterFactory";
