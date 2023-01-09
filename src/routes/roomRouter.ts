@@ -2,7 +2,7 @@ import RoomModel from "../data/models/RoomModel";
 import RouterConfig from "../generators/CommonTypes/RouterConfig";
 import RouterFactory from "../generators/Factories/RouterFactory";
 
-const config: RouterConfig[] = [
+export const room_config: RouterConfig[] = [
     {
         type:       "GET",
         uri:        "/getOneById/:id",
@@ -53,6 +53,4 @@ const config: RouterConfig[] = [
     },
 ];
 
-const RoomRoutes = RouterFactory.createRoute(config);
-
-export default RoomRoutes;
+export const RoomRoutes = RouterFactory.createRoute(room_config);

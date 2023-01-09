@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 import cors from 'cors';
 
-import RoomRoutes from './routes/roomRouter';
+import { RoomRoutes } from './routes/roomRouter';
 // import GuestRoutes from './routes/guestRouter';
 // import UserRoutes from './routes/userRouter';
 
