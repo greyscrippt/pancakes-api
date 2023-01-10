@@ -14,10 +14,11 @@ describe("Should test the '/rooms' endpoint", () => {
 
     describe("test the GET_ALL routes successfully", () => {
         const routes = filter_routes(room_config, "GET_ALL");
+        const prefix = "/api/rooms"
 
         routes.map((endpoint: RouterConfig) => {
-            it("should return status code 200", async() => {
-                const data = await test_app.get("/api/rooms" + endpoint.uri);
+            it("returns status code 200", async() => {
+                const data = await test_app.get(prefix + endpoint.uri);
 
                 chai.expect(data.status).to.equal(200);
             });
