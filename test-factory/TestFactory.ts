@@ -3,23 +3,73 @@ import supertest from "supertest";
 
 import RouterFactory from "../src/generators/Factories/RouterFactory";
 import RouterConfig from "../src/generators/CommonTypes/RouterConfig";
+import { expect } from "chai";
 
-const EndpointFunctions = {
-    "GET": {
-        "GET_ALL": () => {},
-        "GET_BY_ID": () => {},
-        "GET_COUNT": () => {},
+interface EndpointInterface {
+    type: string,
+    callback: any,
+}
+
+interface EndpointsInterface {
+    type: string,
+    callbacks: Array<EndpointInterface>,
+}
+
+interface RequestData {
+    uri: string,
+    data?: any,
+}
+
+const EndpointFunctions: Array<EndpointsInterface> = [
+    {
+        "type": "GET",
+        "callbacks": [
+            {
+                "type": "GET_ALL",
+                "callback": async(app: any, data: RequestData) => {
+                    const res = await app.get(data.uri);
+
+                    expect(res.status).eq(3201);
+                },
+            },
+            {
+                "type": "GET_BY_ID",
+                "callback": () => {},
+            },
+            {
+                "type": "GET_COUNT",
+                "callback": () => {},
+            },
+        ],
     },
-    "DELETE": {
-        "DELETE_BY_ID": () => {},
+    {
+        "type": "DELETE",
+        "callbacks": [
+            {
+                "type": "DELETE_BY_ID",
+                "callback": () => {},
+            },
+        ],
     },
-    "UPDATE": {
-        "UPDATE_BY_ID": () => {},
+    {
+        "type": "UPDATE",
+        "callbacks": [
+            {
+                "type": "UPDATE_BY_ID",
+                "callback": () => {},
+            },
+        ],
     },
-    "POST": {
-        "POST_ONE": () => {},
+    {
+        "type": "POST",
+        "callbacks": [
+            {
+                "type": "POST_ONE",
+                "callback": () => {},
+            },
+        ],
     },
-};
+];
 
 export function testRouter(router_config: Array<RouterConfig>) {
     const router = RouterFactory.createRoute(router_config);
@@ -29,10 +79,20 @@ export function testRouter(router_config: Array<RouterConfig>) {
 
     const app = supertest(express_app);
 
-    router_config.map((endpoint: RouterConfig) => {
-        // EndpointFunctions.find((item: any) => item.type == type).action(model);
-    });
-}
+    return router_config.map(async(endpoint: RouterConfig) => {
+        const layer1 = EndpointFunctions
+            .find((item) => item.type==endpoint.type);
 
-export function testEndpoint(endpoint: RouterConfig, app: any) {
+        if(!layer1) return;
+        if(!layer1.callbacks) return;
+
+        const layer2 = layer1
+            .callbacks
+            .find((item) => item.type==endpoint.middleware.type);
+
+        if(!layer2) return;
+        if(!layer2.callback) return;
+
+        await layer2.callback(app, endpoint.uri);
+    });
 }
