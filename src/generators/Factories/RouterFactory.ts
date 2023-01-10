@@ -10,7 +10,7 @@ function createMiddleware(middleware: MiddlewareConfig) {
 
 const RouterFactory = {
     createRoute(endpoints: RouterConfig[]) {
-        const route = Router();
+        const router = Router();
 
         endpoints.map(( endpoint ) => {
             // if()
@@ -18,19 +18,19 @@ const RouterFactory = {
             const middleware = createMiddleware(endpoint.middleware);
 
             if( endpoint.type == "GET" ){
-                route.get(endpoint.uri, middleware);
+                router.get(endpoint.uri, middleware);
             } else if( endpoint.type == "POST" ){
-                route.post(endpoint.uri, middleware);
+                router.post(endpoint.uri, middleware);
             } else if( endpoint.type == "PATCH" ){
-                route.patch(endpoint.uri, middleware);
+                router.patch(endpoint.uri, middleware);
             } else if( endpoint.type == "DELETE" ){
-                route.delete(endpoint.uri, middleware);
+                router.delete(endpoint.uri, middleware);
             } else {
                 return("{'error': 'Error'}");
             }
         });
 
-        return(route);
+        return(router);
     }
 }
 
