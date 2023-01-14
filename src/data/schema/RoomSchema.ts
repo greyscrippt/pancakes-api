@@ -9,6 +9,10 @@ const RoomSchema = new Schema({
         required: false,
         type: Number,
     },
+    available: {
+        required: true,
+        type: Boolean,
+    },
 });
 
 export default RoomSchema;
