@@ -13,7 +13,9 @@ const ReservationSchema = new Schema({
         required: true,
         type: String,
     },
-    made_by: {
+
+    // Staff resposible for the creation of this reservation.
+    created_by: {
         required: true,
         type: String,
     },
