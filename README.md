@@ -56,12 +56,6 @@ const app = express();
 app.use(sample_router);
 ```
 
-## Todo
-
-- [ ] TestFactory to auto-generate tests.
-
-- [ ] Rename RouteType folder to EndpointType
-
 ## Project Structure
 ```
 src
@@ -92,6 +86,13 @@ For non-generator middleware, such as Auth.
 For defining and loading generated routes.
 
 ## Bussiness Rules
+
+### API
+
+Endpoint(or Router) Generator
+
+- [ ] Each `Endpoint` should use a `EndpointConfig` specification.
+- [ ] Each `Endpoint` should be test-able with a `TestGenerator`.
 
 ### Database
 
