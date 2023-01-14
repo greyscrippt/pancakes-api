@@ -90,3 +90,21 @@ For non-generator middleware, such as Auth.
 
 ### Routes
 For defining and loading generated routes.
+
+## Bussiness Rules
+
+### Database
+
+Accommodation
+
+- [ ] Each `Accommodation` must have a unique name.
+- [ ] Each `Accommodation` must have a `Location`.
+
+Location
+
+- [ ] Each `Location` can have `Accommodations`.
+
+Room
+
+- [ ] Each `Room` must have a unique name.
+- [ ] Each `Room` must belong to an `Accommodation`.
