@@ -9,19 +9,17 @@ function filter_routes(config: Array<RouterConfig>, route_type: string) {
     return config.filter((item: RouterConfig) => item.middleware.type == route_type);
 }
 
-describe("Should test the '/rooms' endpoint", () => {
+describe("test the GET_ALL routes successfully", () => {
     const test_app = supertest(app);
+    const routes = filter_routes(room_config, "GET_ALL");
+    const prefix = "/api/rooms";
 
-    describe("test the GET_ALL routes successfully", () => {
-        const routes = filter_routes(room_config, "GET_ALL");
-        const prefix = "/api/rooms"
+    routes.map((endpoint: RouterConfig) => {
+        describe("Testing the 'GET_ALL' method on '/api/rooms'", async() => {
+            const data = await test_app.get(prefix + endpoint.uri);
 
-        routes.map((endpoint: RouterConfig) => {
-            it("returns status code 200", async() => {
-                const data = await test_app.get(prefix + endpoint.uri);
-
-                chai.expect(data.status).to.equal(200);
-            });
+            chai.expect(data.status).to.equal(200);
+            it("sdasd", () => {});
         });
     });
 });
