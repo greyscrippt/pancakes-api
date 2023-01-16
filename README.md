@@ -109,3 +109,20 @@ Room
 
 - [ ] Each `Room` must have a unique name.
 - [ ] Each `Room` must belong to an `Accommodation`.
+
+Company
+
+- [ ] Each `Company` must have a name.
+
+User
+
+- [ ] Each `User` must belong to a `Company`.
+- [ ] Each `User` has a set of `Role`s.
+- [ ] The `User` that signs up a company automatically gains the `Admin` role.
+
+Role
+
+- [ ] Each `Role` gives a set of permissions to a `User`.
+- [ ] A `Role` can be customized by a `User` with the `Admin` role.
+- [ ] The `Admin` role can only be removed by a `User` with `Admin` role.
+- [ ] The `Admin` role can't be removed by a `User` that is currently using it.
