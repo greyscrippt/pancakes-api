@@ -115,7 +115,6 @@ Room
 Company
 
 - [ ] Each `Company` must have a name.
-- [ ] Each `Company` may have a set of references to `Accommodation`s
 
 User
 
