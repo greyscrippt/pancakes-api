@@ -108,7 +108,7 @@ Accommodation
 
 Location
 
-- [ ] Each `Location` can have `Accommodations`.
+- [ ] Each `Location` must have a unique `location_name`.
 
 Room
 
