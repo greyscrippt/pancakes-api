@@ -14,7 +14,13 @@ const UserSchema = new Schema({
         type: String,
         minlength: 6,
         required: true,
-    }
+    },
+    roles [
+        {
+            type: String,
+            unique: true,
+        },
+    ],
 });
 
 export default UserSchema;
