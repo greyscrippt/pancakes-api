@@ -1,6 +1,11 @@
 import { Schema } from "mongoose";
 
 const ReservationSchema = new Schema({
+    // Guest who made the reservation
+    reserved_by: {
+        type: String,
+        required: true,
+    },
     date_in: {
         required: true,
         type: Date,

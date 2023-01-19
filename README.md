@@ -98,6 +98,9 @@ Endpoint(or Router) Generator
 
 ### Database
 
+Inquire(when a guest is preparing to make a reservation).
+- [ ] Each `Inquire` should have a creation date.
+
 Accommodation
 
 - [ ] Each `Accommodation` must have a unique name.
