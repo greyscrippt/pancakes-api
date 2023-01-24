@@ -10,7 +10,7 @@ const RoomSchema = new Schema({
         type: Number,
     },
     available: {
-        required: true,
+        required: false,
         type: Boolean,
     },
 });

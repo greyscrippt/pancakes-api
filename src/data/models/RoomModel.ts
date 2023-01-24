@@ -1,6 +1,6 @@
 import { model } from "mongoose";
-import GuestSchema from "../schema/GuestSchema";
+import RoomSchema from "../schema/RoomSchema";
 
-const RoomModel = model('Guest', GuestSchema);
+const RoomModel = model('Room', RoomSchema);
 
 export default RoomModel;

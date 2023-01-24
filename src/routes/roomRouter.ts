@@ -5,7 +5,7 @@ import RouterFactory from "../generators/Factories/RouterFactory";
 export const room_config: RouterConfig[] = [
     {
         type:       "GET",
-        uri:        "/getOneById/:id",
+        uri:        "/:id",
         middleware: {
             type: "GET_BY_ID",
             model: RoomModel,
@@ -13,7 +13,7 @@ export const room_config: RouterConfig[] = [
    },
     {
         type:       "GET",
-        uri:        "/getAll",
+        uri:        "/all",
         middleware: {
             type: "GET_ALL",
             model: RoomModel,
@@ -21,7 +21,7 @@ export const room_config: RouterConfig[] = [
     },
     {
         type:       "GET",
-        uri:        "/getCount",
+        uri:        "/count",
         middleware: {
             type: "GET_COUNT",
             model: RoomModel,
@@ -29,7 +29,7 @@ export const room_config: RouterConfig[] = [
     },
     {
         type:       "POST",
-        uri:        "/postOne",
+        uri:        "/",
         middleware: {
             type: "POST_ONE",
             model: RoomModel,
@@ -37,7 +37,7 @@ export const room_config: RouterConfig[] = [
     },
     {
         type:       "PATCH",
-        uri:        "/updateOneById/:id",
+        uri:        "/:id",
         middleware: {
             type: "UPDATE_BY_ID",
             model: RoomModel,
@@ -45,7 +45,7 @@ export const room_config: RouterConfig[] = [
     },
     {
         type:       "DELETE",
-        uri:        "/deleteOneById/:id",
+        uri:        "/:id",
         middleware: {
             type: "DELETE_BY_ID",
             model: RoomModel,
