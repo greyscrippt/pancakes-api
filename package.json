@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "nodemon src/server.ts --ignore tests/ --watch",
     "testw": "ts-mocha tests/**/*.test.ts --watch --watch-files tests/**/*.test.ts",
-    "test": "ts-mocha old-tests/**/*.test.ts"
+    "test": "ts-mocha tests/**/*.test.ts"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",

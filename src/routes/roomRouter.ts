@@ -13,7 +13,7 @@ export const room_config: RouterConfig[] = [
    },
     {
         type:       "GET",
-        uri:        "/all",
+        uri:        "/",
         middleware: {
             type: "GET_ALL",
             model: RoomModel,
