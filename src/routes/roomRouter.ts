@@ -5,7 +5,7 @@ import RouterFactory from "../generators/Factories/RouterFactory";
 export const room_config: RouterConfig[] = [
     {
         type:       "GET",
-        uri:        "/:id",
+        uri:        "/one/:id",
         middleware: {
             type: "GET_BY_ID",
             model: RoomModel,
@@ -13,7 +13,7 @@ export const room_config: RouterConfig[] = [
    },
     {
         type:       "GET",
-        uri:        "/",
+        uri:        "/all",
         middleware: {
             type: "GET_ALL",
             model: RoomModel,
