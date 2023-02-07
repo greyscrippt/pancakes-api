@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  nanoerp_db:
+    container_name: nanoerp_db
+    image: mongo:4
+    restart: on-failure
+    ports:
+      - "27017:27017"
+  api:
+    container_name: nanoerp-api
+    image: mongark/nanoerp-api
+    restart: on-failure
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - nanoerp_db
