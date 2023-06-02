@@ -5,32 +5,37 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 import { RoomRoutes } from './routes/roomRouter';
-// import GuestRoutes from './routes/guestRouter';
-// import UserRoutes from './routes/userRouter';
+import { exit } from 'process';
 
-dotenv.config();
+export function createAppInstance() {
+    const masterRouter = Router();
+    const app = express();
 
-const MONGO_URL: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL; // TODO: find more elegant solution to this line.
+    dotenv.config();
 
+    const MONGO_URL: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL;
 
-mongoose.connect(MONGO_URL);
-const database = mongoose.connection;
+    if( MONGO_URL == "" ) {
+        console.error("Could not get database url from .env!");
+        return;
+    }
+    
+    console.log("Connecting to MongoDB...");
+    mongoose.connect(MONGO_URL).then(() => {
+        console.log("Database connection established")
 
-const masterRouter = Router();
-const app = express();
+        app.use(json());
+        app.use(cors());
 
-database.on('error', (error) => {
-    console.log(error);
-})
+        masterRouter.get('/ping', (req, res) => res.status(200).send("pong"));
+        masterRouter.use('/rooms', RoomRoutes);
 
-app.use(json());
-app.use(cors());
+        app.use('/api', masterRouter);
+    }).catch((error) => {
+        console.error("Could not connect to MongoDB");
+        console.error(error);
+        exit();
+    });
 
-masterRouter.get('/ping', (req, res) => res.status(200).send("pong"));
-masterRouter.use('/rooms', RoomRoutes);
-// masterRouter.use('/guests', GuestRoutes);
-// masterRouter.use('/users', UserRoutes);
-
-app.use('/api', masterRouter);
-
-export default app;
+    return app;
+}
