@@ -1,4 +1,4 @@
-interface Pipe {
+type Pipe = {
     callback: any,
 }
 

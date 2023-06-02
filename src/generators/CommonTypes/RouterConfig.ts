@@ -1,7 +1,8 @@
 import MiddlewareConfig from "./MiddlewareConfig";
 
-export default interface RouterType {
+type RouterType = {
     type: string,
     uri: string,
     middleware: MiddlewareConfig,
-};
+}
+export default RouterType;

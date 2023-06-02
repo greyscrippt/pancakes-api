@@ -1,7 +1,8 @@
 import { Model } from "mongoose";
 
-export default interface MiddlewareConfig {
+type MiddlewareConfig = {
     type: string,
     model: Model<any, any>,
 }
+export default MiddlewareConfig
 
