@@ -1,6 +1,4 @@
-interface ActionType {
+export default interface ActionType {
     type: string,
     action: any,
 }
-
-export default ActionType;

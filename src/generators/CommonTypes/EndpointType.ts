@@ -1,6 +1,4 @@
-interface EndpointType {
+export default interface EndpointType {
     body: any,
     type: string,
 }
-
-export default EndpointType;
