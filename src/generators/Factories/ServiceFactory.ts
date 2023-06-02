@@ -4,7 +4,9 @@ import { Model } from "mongoose";
  import Actions from '../Actions/Actions';
  import EndpointType from "../CommonTypes/EndpointType";
  
+
  const ServiceFactory = {
+    // TODO: optimize this function
      create(endpoint: EndpointType, model: Model<any>) {
          if( Actions.find((item: ActionType) => item.type == endpoint.type) ) {
              return Actions.find((item: ActionType) => item.type == endpoint.type).action(model, endpoint.body);
