@@ -3,6 +3,7 @@ import { Router } from "express";
 import MiddlewareConfig from "../CommonTypes/MiddlewareConfig";
 import RouterConfig from "../CommonTypes/RouterConfig";
 import ControllerFactory from "./ControllerFactory";
+import logger from "../../logging/logger";
 
 function createMiddleware(middleware: MiddlewareConfig) {
     return ControllerFactory.create(middleware.type, middleware.model);
@@ -13,8 +14,6 @@ const RouterFactory = {
         const router = Router();
 
         endpoints.map(( endpoint ) => {
-            // if()
-
             const middleware = createMiddleware(endpoint.middleware);
 
             if( endpoint.type == "GET" ){
@@ -26,6 +25,7 @@ const RouterFactory = {
             } else if( endpoint.type == "DELETE" ){
                 router.delete(endpoint.uri, middleware);
             } else {
+                logger.error("Router type not found in RouterFactory.createRoute");
                 return("{'error': 'Error'}");
             }
         });
