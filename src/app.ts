@@ -5,9 +5,11 @@ import dotenv from "dotenv";
 import cors from 'cors';
 
 import { RoomRoutes } from './routes/roomRouter';
-import { exit } from 'process';
+import logger from './logging/logger';
 
 export function createAppInstance() {
+    logger.info("Creating server app instance")
+
     const masterRouter = Router();
     const app = express();
 
@@ -16,25 +18,27 @@ export function createAppInstance() {
     const MONGO_URL: string = (!process.env.DATABASE_URL) ? "" : process.env.DATABASE_URL;
 
     if( MONGO_URL == "" ) {
-        console.error("Could not get database url from .env!");
+        logger.error("Could not get database url from .env!");
         return;
     }
     
-    console.log("Connecting to MongoDB...");
+    logger.info("Connecting to MongoDB...");
     mongoose.connect(MONGO_URL).then(() => {
-        console.log("Database connection established")
+        logger.info("Database connection established");
 
         app.use(json());
         app.use(cors());
-
+        
+        logger.info("Setting up routes");
         masterRouter.get('/ping', (req, res) => res.status(200).send("pong"));
         masterRouter.use('/rooms', RoomRoutes);
 
         app.use('/api', masterRouter);
+        
+        logger.info("App created successfully!")
     }).catch((error) => {
-        console.error("Could not connect to MongoDB");
-        console.error(error);
-        exit();
+        logger.error("Could not connect to MongoDB\n" + error);
+        return;
     });
 
     return app;
