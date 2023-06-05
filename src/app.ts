@@ -1,4 +1,4 @@
-import express, { Router, json } from 'express';
+import express, { Request, Response, Router, json } from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
 
@@ -6,6 +6,8 @@ import cors from 'cors';
 
 import { RoomRoutes } from './routes/roomRouter';
 import logger from './logging/logger';
+import { signTokenMiddleware, verifyTokenMiddleware } from './middleware/auth';
+import { exit } from 'process';
 
 export function createAppInstance() {
     logger.info("Creating server app instance")
@@ -30,7 +32,11 @@ export function createAppInstance() {
         app.use(cors());
         
         logger.info("Setting up routes");
-        masterRouter.get('/ping', (req, res) => res.status(200).send("pong"));
+        masterRouter.get('/ping', (_req: Request, res: Response) => res.status(200).json("pong"));
+
+        masterRouter.get('/authPing', verifyTokenMiddleware, (_req: Request, res: Response) => res.status(200).json("authPong"));
+        masterRouter.post('/signToken', signTokenMiddleware);
+
         masterRouter.use('/rooms', RoomRoutes);
 
         app.use('/api', masterRouter);
@@ -38,7 +44,7 @@ export function createAppInstance() {
         logger.info("App created successfully!")
     }).catch((error) => {
         logger.error("Could not connect to MongoDB\n" + error);
-        return;
+        exit();
     });
 
     return app;
