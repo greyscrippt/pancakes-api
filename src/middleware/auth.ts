@@ -31,12 +31,23 @@ function signTokenMiddleware(req: Request, res: Response) {
     });
 }
 
-function verifyTokenMiddleware(req: Request, res: Response) {
-    // jwt.verify(token, process.env.TOKEN_SECRET);
-    if(!req.headers['authorization']) {
+function verifyTokenMiddleware(req: Request, res: Response, next: NextFunction) {
+    const token = req.headers['x-access-token'];
+
+    if(!token) {
         logger.error("No authorization data was provided for the verify token middleware");
         res.status(400).json({"msg": "No data provided in the middleware"})
     }
+
+    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+
+    if(verified.username == "nelson" && verified.password == "nelson") {
+        next();
+        return;
+    }
+
+    res.status(400).json({ "msg": "User could not be verified" })
+    next("Username incorrect");
 }
 
 export { signTokenMiddleware, verifyTokenMiddleware };
