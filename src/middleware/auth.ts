@@ -1,11 +1,16 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+
 import UserModel from "../data/models/UserModel";
 import logger from "../logging/logger";
 
-function signTokenMiddleware(req: Request, res: Response) {
-    // const userData = UserModel.findOne({ username: user });
-    
+interface UserInterface {
+    username:   string,
+    password:   string,
+    email:      string,
+}
+
+function signTokenMiddleware(req: Request, res: Response) {   
     if( !req.body ) {
         res.status(400).json({ "msg": "No auth data provided" });
         return;
@@ -20,6 +25,13 @@ function signTokenMiddleware(req: Request, res: Response) {
         res.status(400).json({ "msg": "No password provided" });
         return;
     }
+
+    // const userData = await UserModel.findOne({ username: req.body.username });
+
+    // if(!userData) {
+        // res.status(404).json({ "msg": "User could not be found" });
+        // return;
+    // }
 
     jwt.sign({ "username": req.body.username, "password": req.body.password }, process.env.TOKEN_SECRET, (err: any, token: any) => {
         if(err) {
@@ -39,7 +51,12 @@ function verifyTokenMiddleware(req: Request, res: Response, next: NextFunction) 
         res.status(400).json({"msg": "No data provided in the middleware"})
     }
 
-    const verified = jwt.verify(token, process.env.TOKEN_SECRET);
+    const verified = jwt.verify(token as string, process.env.TOKEN_SECRET);
+
+    if(!verified) {
+        res.status(400).json({ "msg": "Token could not be verified" })
+        return;
+    }
 
     if(verified.username == "nelson" && verified.password == "nelson") {
         next();
@@ -47,7 +64,38 @@ function verifyTokenMiddleware(req: Request, res: Response, next: NextFunction) 
     }
 
     res.status(400).json({ "msg": "User could not be verified" })
-    next("Username incorrect");
 }
 
-export { signTokenMiddleware, verifyTokenMiddleware };
+async function createUserMiddleware(req: Request, res: Response) {
+    const user = req.body;
+
+    if(!user || !user.username || !user.password || !user.email) {
+        res.status(400).json({ msg: "No user data provided" })
+        return;
+    }
+
+    const userExists = await UserModel.exists({ username: user.username, password: user.password });
+
+    if(userExists) {
+        res.status(400).json({ msg: "User already exists" });
+        return;
+    }
+
+    const userCreated = UserModel.create({
+        username:   user.username,
+        email:      user.email,
+        password:   user.password,
+        roles:      [],
+    });
+
+    if(!userCreated) {
+        res.status(400).json({ msg: "Failed to create user" });
+        return;
+    }
+
+    res.status(200).json({ msg: "Success" })
+    
+    // const userDB = UserModel.findOne({ username: user_data.username });
+}
+
+export { createUserMiddleware, signTokenMiddleware, verifyTokenMiddleware };

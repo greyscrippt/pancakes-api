@@ -6,7 +6,7 @@ import cors from 'cors';
 
 import { RoomRoutes } from './routes/roomRouter';
 import logger from './logging/logger';
-import { signTokenMiddleware, verifyTokenMiddleware } from './middleware/auth';
+import { createUserMiddleware, signTokenMiddleware, verifyTokenMiddleware } from './middleware/auth';
 import { exit } from 'process';
 
 export function createAppInstance() {
@@ -36,10 +36,16 @@ export function createAppInstance() {
 
         masterRouter.get('/authPing', verifyTokenMiddleware, (_req: Request, res: Response) => res.status(200).json("authPong"));
         masterRouter.post('/signToken', signTokenMiddleware);
+        masterRouter.post('/createUser', createUserMiddleware);
 
         masterRouter.use('/rooms', RoomRoutes);
 
         app.use('/api', masterRouter);
+
+        process.on('exit', () => {
+            logger.info("Closing server");
+            mongoose.disconnect()
+        });
         
         logger.info("App created successfully!")
     }).catch((error) => {
