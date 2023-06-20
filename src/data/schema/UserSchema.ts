@@ -11,13 +11,13 @@ const UserSchema = new Schema({
         required: true,
     },
     password: {
-        type: String,
+        type: [String],
         minlength: 6,
         required: true,
     },
     roles: [
         {
-            type: String,
+            type: [String],
             unique: true,
         },
     ],

@@ -17,6 +17,34 @@ const createMockUser = () => {
 const mock_user = createMockUser();
 
 before(() => {
+    it("should test user creation without password field on endpoint POST '/api/createUser'", async() => {
+        const mock_user_wrong = { username: "aswd12"};
+
+        const result = await app
+            .post("/api/createUser")
+            .send(mock_user_wrong);
+        
+        expect(result.status).to.equal(400);
+    });
+    
+    it("should test user creation without username field on endpoint POST '/api/createUser'", async() => {
+        const mock_user_wrong = { password: "aswd12"};
+
+        const result = await app
+            .post("/api/createUser")
+            .send(mock_user_wrong);
+        
+        expect(result.status).to.equal(400);
+    });
+    
+    it("should test user creation without form data on endpoint POST '/api/createUser'", async() => {
+        const result = await app
+            .post("/api/createUser");
+        
+        expect(result.status).to.equal(400);
+        expect(result.body['msg']).to.equal("No user data provided");
+    });
+
     it("should test user creation on endpoint POST '/api/createUser'", async() => {
         const result = await app
             .post("/api/createUser")
@@ -72,33 +100,5 @@ describe("Testing authentication middleware", async() => {
 
         expect(result.status).to.equal(400);
         expect(result.body['msg']).to.equal("User could not be verified");
-    });
-    
-    it("should test user creation without password field on endpoint POST '/api/createUser'", async() => {
-        const mock_user_wrong = { username: "aswd12"};
-
-        const result = await app
-            .post("/api/createUser")
-            .send(mock_user_wrong);
-        
-        expect(result.status).to.equal(400);
-    });
-    
-    it("should test user creation without username field on endpoint POST '/api/createUser'", async() => {
-        const mock_user_wrong = { password: "aswd12"};
-
-        const result = await app
-            .post("/api/createUser")
-            .send(mock_user_wrong);
-        
-        expect(result.status).to.equal(400);
-    });
-    
-    it("should test user creation without form data on endpoint POST '/api/createUser'", async() => {
-        const result = await app
-            .post("/api/createUser");
-        
-        expect(result.status).to.equal(400);
-        expect(result.body['msg']).to.equal("No user data provided");
     });
 });

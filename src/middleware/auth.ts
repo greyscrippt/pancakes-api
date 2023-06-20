@@ -81,21 +81,18 @@ async function createUserMiddleware(req: Request, res: Response) {
         return;
     }
 
-    const userCreated = UserModel.create({
+    UserModel.create({
         username:   user.username,
         email:      user.email,
         password:   user.password,
-        roles:      [],
+        roles:      ["admin"],
+    }).then((userCreated) => {
+      logger.info("Created user successfully!");
+      res.status(200).json({ msg: "Success" })
+    }).catch((err) => {
+      logger.error(err);
+      res.status(400).json({ msg: "Failed to create user" });
     });
-
-    if(!userCreated) {
-        res.status(400).json({ msg: "Failed to create user" });
-        return;
-    }
-
-    res.status(200).json({ msg: "Success" })
-    
-    // const userDB = UserModel.findOne({ username: user_data.username });
 }
 
 export { createUserMiddleware, signTokenMiddleware, verifyTokenMiddleware };
