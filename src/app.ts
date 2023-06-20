@@ -6,7 +6,7 @@ import cors from 'cors';
 
 import { RoomRoutes } from './routes/roomRouter';
 import logger from './logging/logger';
-import { createUserMiddleware, signTokenMiddleware, verifyTokenMiddleware } from './middleware/auth';
+import { authMiddleware, createUserMiddleware, signTokenMiddleware } from './middleware/auth';
 import { exit } from 'process';
 
 export function createAppInstance() {
@@ -34,8 +34,9 @@ export function createAppInstance() {
         logger.info("Setting up routes");
         masterRouter.get('/ping', (_req: Request, res: Response) => res.status(200).json("pong"));
 
-        masterRouter.get('/authPing', verifyTokenMiddleware, (_req: Request, res: Response) => res.status(200).json("authPong"));
+        masterRouter.get('/authPing', authMiddleware, (_req: Request, res: Response) => res.status(200).json("authPong"));
         masterRouter.post('/signToken', signTokenMiddleware);
+        
         masterRouter.post('/createUser', createUserMiddleware);
 
         masterRouter.use('/rooms', RoomRoutes);

@@ -11,6 +11,7 @@ const createMockUser = () => {
         username:   "test.user."        + uuidv4() as string,
         password:   "test.password."    + uuidv4() as string,
         email:      uuidv4() as string  + "@mail.com",
+        roles: ["adm"],
     };
 };
 
@@ -68,7 +69,7 @@ describe("Testing authentication middleware", async() => {
             .post("/api/signToken")
             .send(mock_user);
 
-        expect(res.status).to.equal(200);
+        expect(res.status).to.equal(201);
     });
     
     it("should test verified users on endpoint POST '/api/authPing'", async() => {
@@ -76,7 +77,7 @@ describe("Testing authentication middleware", async() => {
             .post("/api/signToken")
             .send(mock_user);
 
-        expect(tokenRes.status).to.equal(200);
+        expect(tokenRes.status).to.equal(201);
         
         const result = await app
             .get("/api/authPing")

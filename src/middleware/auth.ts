@@ -1,69 +1,182 @@
 import { NextFunction, Request, Response } from "express";
-import jwt from "jsonwebtoken";
+import { encode, decode, TAlgorithm } from 'jwt-simple';
 
 import UserModel from "../data/models/UserModel";
 import logger from "../logging/logger";
 
 interface UserInterface {
-    username:   string,
-    password:   string,
-    email:      string,
+    id:           number;
+    dateCreated:  number;
+    username:     string;
+    password:     string;
 }
 
-function signTokenMiddleware(req: Request, res: Response) {   
-    if( !req.body ) {
-        res.status(400).json({ "msg": "No auth data provided" });
-        return;
-    }
-
-    if( !req.body.username ) {
-        res.status(400).json({ "msg": "No username provided" });
-        return;
-    }
-    
-    if( !req.body.password ) {
-        res.status(400).json({ "msg": "No password provided" });
-        return;
-    }
-
-    // const userData = await UserModel.findOne({ username: req.body.username });
-
-    // if(!userData) {
-        // res.status(404).json({ "msg": "User could not be found" });
-        // return;
-    // }
-
-    jwt.sign({ "username": req.body.username, "password": req.body.password }, process.env.TOKEN_SECRET, (err: any, token: any) => {
-        if(err) {
-            res.status(501).json({ "msg": "Error creating token" });
-            return;
-        }
-
-        res.status(200).json({"x-access-token": token});
-    });
+interface Session {
+  id:             number,
+  dateCreated:    number,
+  username:       string,
+  issued:         number,
+  expires:        number,
 }
 
-function verifyTokenMiddleware(req: Request, res: Response, next: NextFunction) {
-    const token = req.headers['x-access-token'];
+type PartialSession = Omit<Session, "issued" | "expires">;
 
-    if(!token) {
-        logger.error("No authorization data was provided for the verify token middleware");
-        res.status(400).json({"msg": "No data provided in the middleware"})
+interface EncodeResult {
+  token:    string,
+  expires:  number,
+  issued:   number,
+}
+
+type ValidResult = {
+  type: "valid";
+  session: Session;
+};
+
+type IntegrityErrorResult = {
+  type: "integrity-error";
+};
+
+type InvalidTokenResult = {
+  type: "invalid-token";
+};
+
+type DecodeResult = ValidResult | IntegrityErrorResult | InvalidTokenResult;
+
+type ExpirationStatus = "expired" | "active" | "grace";
+
+function encodeSession(secretKey: string, partialSession: PartialSession): EncodeResult {
+  const algorithm: TAlgorithm = "HS512";
+  const issued                = Date.now();
+  const fifteenMinutesInMs        = 15 * 60 * 1000;
+  const expires               = issued + fifteenMinutesInMs;
+  const session: Session = {
+    ...partialSession,
+    issued:     issued,
+    expires:    expires,
+  };
+
+  const result: EncodeResult = {
+    token:      encode(session, secretKey, algorithm),
+    issued:     issued,
+    expires:    expires,
+  }
+
+  return result;
+}
+
+function decodeSession(secretKey: string, tokenString: string): DecodeResult {
+  const algorithm: TAlgorithm = "HS512";
+
+  let result: Session;
+
+  try {
+    result = decode(tokenString, secretKey, false, algorithm);
+  } catch (_e) {
+    const e: Error = _e;
+
+    if (e.message === "No token supplied" || e.message === "Not enough or too many segments") {
+      return {
+        type: "invalid-token"
+      };
     }
 
-    const verified = jwt.verify(token as string, process.env.TOKEN_SECRET);
-
-    if(!verified) {
-        res.status(400).json({ "msg": "Token could not be verified" })
-        return;
+    if (e.message === "Signature verification failed" || e.message === "Algorithm not supported") {
+      return {
+        type: "integrity-error"
+      };
     }
 
-    if(verified.username == "nelson" && verified.password == "nelson") {
-        next();
-        return;
+    // Handle json parse errors, thrown when the payload is nonsense
+    if (e.message.indexOf("Unexpected token") === 0) {
+      return {
+        type: "invalid-token"
+      };
     }
 
-    res.status(400).json({ "msg": "User could not be verified" })
+    throw e;
+  }
+
+  return {
+    type: "valid",
+    session: result,
+  }
+}
+
+function checkExpirationStatus(token: Session): ExpirationStatus {
+  const now = Date.now();
+
+  if( token.expires > now ) return "active";
+
+  const threeHoursInMs = 3 * 60 * 60 * 1000;
+  const threeHoursAfterExpiration = token.expires + threeHoursInMs;
+
+  if( threeHoursAfterExpiration > now ) return "grace";
+
+  return "expired";
+}
+
+function authMiddleware(req: Request, res: Response, next: NextFunction) {   
+  const unauthorized = (message: string) => res.status(401).json({
+    ok: false,
+    status: 401,
+    message: message,
+  });
+
+  const requestHeader   = "X-JWT-Token";
+  const responseHeader  = "X-Renewed-JWT-Token";
+  const header          = req.header(requestHeader);
+
+  if( !header ) {
+    unauthorized(`Required ${requestHeader} header not found.`);
+    return;
+  }
+
+  const decodedSession: DecodeResult = decodeSession(process.env.TOKEN_SECRET, header);
+
+  if( decodedSession.type === "integrity-error" || decodedSession.type === "invalid-token" ) {
+    unauthorized(`Failed to decode or validate authorization token. Reason: ${decodedSession.type}.`);
+    return;
+  }
+
+  const expiration: ExpirationStatus = checkExpirationStatus(decodedSession.session);
+
+  if( expiration === "expired" ) {
+    unauthorized(`Authorization token has expired. Please create a new authorization token.`);
+    return;
+  }
+
+  let session: Session;
+
+  if( expiration === "grace" ) {
+    const { token, expires, issued } = encodeSession(process.env.TOKEN_SECRET, decodedSession.session);
+    session = {
+      ...decodedSession.session,
+      expires: expires,
+      issued: issued,
+    };
+
+    res.setHeader(responseHeader, token);
+  } else {
+    session = decodedSession.session;
+  }
+
+  res.locals = {
+    ...res.locals,
+    session: session,
+  }
+
+  next();
+}
+
+function signTokenMiddleware(req: Request, res: Response, next: NextFunction) {
+  // TODO: Validate users
+  const session = encodeSession( process.env.TOKEN_SECRET, {
+    id: 12345,
+    username: "some user",
+    dateCreated: Date.now(),
+  });
+
+  res.status(201).json(session);
 }
 
 async function createUserMiddleware(req: Request, res: Response) {
@@ -85,7 +198,7 @@ async function createUserMiddleware(req: Request, res: Response) {
         username:   user.username,
         email:      user.email,
         password:   user.password,
-        roles:      ["admin"],
+        roles:      user.roles,
     }).then((userCreated) => {
       logger.info("Created user successfully!");
       res.status(200).json({ msg: "Success" })
@@ -95,4 +208,4 @@ async function createUserMiddleware(req: Request, res: Response) {
     });
 }
 
-export { createUserMiddleware, signTokenMiddleware, verifyTokenMiddleware };
+export { authMiddleware, createUserMiddleware, signTokenMiddleware };
