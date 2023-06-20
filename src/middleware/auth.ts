@@ -47,7 +47,7 @@ type ExpirationStatus = "expired" | "active" | "grace";
 function encodeSession(secretKey: string, partialSession: PartialSession): EncodeResult {
   const algorithm: TAlgorithm = "HS512";
   const issued                = Date.now();
-  const fifteenMinutesInMs        = 15 * 60 * 1000;
+  const fifteenMinutesInMs    = 15 * 60 * 1000;
   const expires               = issued + fifteenMinutesInMs;
   const session: Session = {
     ...partialSession,
@@ -73,6 +73,8 @@ function decodeSession(secretKey: string, tokenString: string): DecodeResult {
     result = decode(tokenString, secretKey, false, algorithm);
   } catch (_e) {
     const e: Error = _e;
+
+    logger.error("Could not decode session: " + e.message);
 
     if (e.message === "No token supplied" || e.message === "Not enough or too many segments") {
       return {
@@ -116,15 +118,19 @@ function checkExpirationStatus(token: Session): ExpirationStatus {
 }
 
 function authMiddleware(req: Request, res: Response, next: NextFunction) {   
-  const unauthorized = (message: string) => res.status(401).json({
-    ok: false,
-    status: 401,
-    message: message,
-  });
+  const unauthorized = (message: string) => {
+    logger.error(message);
+
+    res.status(401).json({
+      ok: false,
+      status: 401,
+      message: message,
+    });
+  };
 
   const requestHeader   = "X-JWT-Token";
   const responseHeader  = "X-Renewed-JWT-Token";
-  const header          = req.header(requestHeader);
+  const header: string  = req.header(requestHeader) as string;
 
   if( !header ) {
     unauthorized(`Required ${requestHeader} header not found.`);
@@ -201,7 +207,7 @@ async function createUserMiddleware(req: Request, res: Response) {
         roles:      user.roles,
     }).then((userCreated) => {
       logger.info("Created user successfully!");
-      res.status(200).json({ msg: "Success" })
+      res.status(200).json({ msg: "Success" });
     }).catch((err) => {
       logger.error(err);
       res.status(400).json({ msg: "Failed to create user" });

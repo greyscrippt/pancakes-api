@@ -1,5 +1,7 @@
 import supertest from "supertest";
 
+import logger from "../src/logging/logger";
+
 import { createAppInstance } from "../src/app";
 import { expect } from "chai";
 import { v4 as uuidv4 } from "uuid"; 
@@ -78,10 +80,12 @@ describe("Testing authentication middleware", async() => {
             .send(mock_user);
 
         expect(tokenRes.status).to.equal(201);
-        
+
+        const token = tokenRes.body.token;
+      
         const result = await app
             .get("/api/authPing")
-            .set("x-access-token", tokenRes.body['x-access-token'])
+            .set("X-JWT-Token", token)
             .send("ping");
 
         expect(result.body).to.equal("authPong");
@@ -92,14 +96,13 @@ describe("Testing authentication middleware", async() => {
             .post("/api/signToken")
             .send(createMockUser());
 
-        expect(tokenRes.status).to.equal(200);
+        expect(tokenRes.status).to.equal(201);
         
         const result = await app
             .get("/api/authPing")
-            .set("x-access-token", tokenRes.body['x-access-token'])
+            .set("X-JWT-Token", tokenRes.body)
             .send("ping");
 
-        expect(result.status).to.equal(400);
-        expect(result.body['msg']).to.equal("User could not be verified");
+        expect(result.status).to.equal(401);
     });
 });
