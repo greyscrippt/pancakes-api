@@ -18,6 +18,12 @@ const UserSchema = new Schema({
     roles: {
         type: [String],
     },
-});
+    createdAt: {
+      type: Date,
+    },
+    updatedAt: {
+      type: Date,
+    },
+}, { timestamps: true });
 
 export default UserSchema;

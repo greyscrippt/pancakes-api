@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "nodemon src/server.ts --ignore tests/ --watch",
     "test": "ts-mocha tests/**/*.test.ts --exit -c",
+    "test:silent": "SILENT_LOGGER=true ts-mocha tests/**/*.test.ts --exit -c",
     "test:watch": "ts-mocha tests/**/*.test.ts --watch --watch-files tests/**/*.test.ts src/**/*.ts",
     "cover": "nyc yarn run test",
     "clean": "rm -rf coverage/ .nyc_output/ build/",

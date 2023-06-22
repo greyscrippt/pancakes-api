@@ -20,6 +20,7 @@ const createMockUser = () => {
 const mock_user = createMockUser();
 
 before(() => {
+  describe("Testing user creation", () => {
     it("should test user creation without password field on endpoint POST '/api/createUser'", async() => {
         const mock_user_wrong = { username: "aswd12"};
 
@@ -56,6 +57,7 @@ before(() => {
         expect(result.body['msg']).to.equal("Success");
         expect(result.status).to.equal(200);
     });
+  });
 });
 
 describe("Testing authentication middleware", async() => {
