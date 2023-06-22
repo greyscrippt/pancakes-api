@@ -11,7 +11,8 @@
     "test:watch": "ts-mocha tests/**/*.test.ts --watch --watch-files tests/**/*.test.ts src/**/*.ts",
     "cover": "nyc yarn run test",
     "clean": "rm -rf coverage/ .nyc_output/ build/",
-    "lint": "eslint --ext .ts ."
+    "lint": "eslint --ext .ts .",
+    "setup:start-db": "docker start test-mongo"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
