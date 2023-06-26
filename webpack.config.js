@@ -9,10 +9,8 @@ module.exports = {
       {
         test: /\.ts?$/,
         include: path.resolve(__dirname, 'src'),
-        // exclude: /node_modules/,
-        loader: 'ts-loader',
-        options: {
-          transpileOnly: true,
+        use: {
+          loader: 'swc-loader',
         },
       },
       {
